@@ -1,5 +1,3 @@
-const Email = window.Email ? window.Email : {};
-
 export const receiveEmail = (userData: any) => {
   const { name, email, message, subject } = userData;
   const contactTemplate = `<h1>Contact Us Form</h1>
@@ -11,7 +9,7 @@ export const receiveEmail = (userData: any) => {
        <p>Please get back to ${name} as soon as possible.</p>
        <p>Regards</p>`;
 
-  Email.send({
+  window.Email.send({
     Host: "smtp.elasticemail.com",
     Username: "hammad@treesols.com",
     Password: "E3B9B68BB53347DC3A0A1E960EC829196608",
@@ -39,7 +37,7 @@ export const sendEmail = (userData: any) => {
       <p>Best regards,</p>
       <p>Hammad Tariq</p>`;
 
-  Email.send({
+  window.Email.send({
     Host: "smtp.elasticemail.com",
     Username: "hammad@treesols.com",
     Password: "E3B9B68BB53347DC3A0A1E960EC829196608",
