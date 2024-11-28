@@ -1,0 +1,9 @@
+.truncate-multi-line {
+  display: -webkit-box; /* Flexbox-like behavior */
+  -webkit-box-orient: vertical; /* Defines the orientation of the box */
+  overflow: hidden; /* Hides the overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis (...) */
+  -webkit-line-clamp: 8; /* Limit to approximately 10 lines */
+  max-height: 20em; /* Adjust based on line height */
+  line-height: 2em; /* Adjust to match the text's line height */
+}
