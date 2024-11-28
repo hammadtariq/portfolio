@@ -1,7 +1,32 @@
-import { forwardRef } from 'react'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { useState } from 'react';
+import { forwardRef } from 'react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { sendEmail } from '../utils/email';
 
 const Contact = forwardRef<HTMLElement>((props, ref) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await sendEmail(formData);
+      alert('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' }); // Reset the form
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      alert('Failed to send the message. Please try again.');
+    }
+  };
+
   return (
     <section ref={ref} className="py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -24,12 +49,14 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               </div>
             </div>
           </div>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="block mb-2 font-medium">Name</label>
               <input
                 type="text"
                 id="name"
+                value={formData.name}
+                onChange={handleInputChange}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
               />
@@ -39,6 +66,8 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               <input
                 type="email"
                 id="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
               />
@@ -47,6 +76,8 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               <label htmlFor="message" className="block mb-2 font-medium">Message</label>
               <textarea
                 id="message"
+                value={formData.message}
+                onChange={handleInputChange}
                 rows={4}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
@@ -62,9 +93,9 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
         </div>
       </div>
     </section>
-  )
-})
+  );
+});
 
-Contact.displayName = 'Contact'
-export default Contact
+Contact.displayName = 'Contact';
+export default Contact;
 

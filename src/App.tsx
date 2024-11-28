@@ -28,7 +28,7 @@ export default function Portfolio() {
         onTestimonialsClick={() => scrollTo(testimonialsRef)}
         onContactClick={() => scrollTo(contactRef)}
       />
-      <Hero />
+      <Hero onProjectsClick={() => scrollTo(projectsRef)} />
       <About ref={aboutRef} />
       <Skills ref={skillsRef} />
       <Projects ref={projectsRef} />
