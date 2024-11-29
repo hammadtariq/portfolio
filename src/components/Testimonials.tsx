@@ -46,7 +46,7 @@ const testimonials: Testimonial[] = [
   },
 ]
 
-const Testimonials = forwardRef<HTMLElement>((props, ref) => {
+const Testimonials = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section ref={ref} className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">

@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { sendEmail } from '../utils/email';
 
-const Contact = forwardRef<HTMLElement>((props, ref) => {
+const Contact = forwardRef<HTMLElement>((_props, ref) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',

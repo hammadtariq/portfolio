@@ -33,7 +33,7 @@ const projects: Project[] = [
   },
 ]
 
-const Projects = forwardRef<HTMLElement>((props, ref) => {
+const Projects = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section ref={ref} className="py-20 bg-white">
       <div className="container mx-auto px-4">

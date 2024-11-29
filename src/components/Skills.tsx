@@ -14,7 +14,7 @@ const skills: Skill[] = [
   { name: 'TypeScript', level: 85 },
 ]
 
-const Skills = forwardRef<HTMLElement>((props, ref) => {
+const Skills = forwardRef<HTMLElement>((_props, ref) => {
   const [animate, setAnimate] = useState(false)
 
   useEffect(() => {
