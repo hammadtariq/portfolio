@@ -1,8 +1,20 @@
-import { forwardRef, useRef } from 'react';
-import { Code, Smartphone, Server } from 'lucide-react';
+import { forwardRef, useRef } from "react";
+import { Code, Smartphone, Server } from "lucide-react";
 
 const About = forwardRef<HTMLElement>((_props, ref) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleVideoClick = () => {
+    // Pause and reset the video
+    if (videoRef.current) {
+      videoRef.current.pause();
+       // Reset to the start if wants to play again
+      // videoRef.current.currentTime = 0;
+    }
+
+    // Open video in a new tab
+    window.open('/intro.mp4', '_blank');
+  };
 
   const handleMouseEnter = () => {
     videoRef.current?.play(); // Play the video on hover
@@ -10,7 +22,8 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
 
   const handleMouseLeave = () => {
     videoRef.current?.pause(); // Pause the video when the mouse leaves
-    videoRef.current!.currentTime = 0; // Reset the video
+    // Reset the video if wants to play again
+    // videoRef.current!.currentTime = 0;
   };
 
   return (
@@ -38,21 +51,20 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
             />
             {/* Play Icon Overlay */}
             <a
-              href="/intro.mp4" // Replace with your video path
-              target="_blank" // This opens the video in a new tab
-              rel="noopener noreferrer" // This ensures security by preventing access to the previous page's window object
-              className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+              href="/intro.mp4"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleVideoClick} // Click handler stops video and opens in new tab
+              className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-100 transition-opacity group-hover:opacity-0"
             >
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full transition-opacity group-hover:opacity-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="white"
-                  className="w-10 h-10"
-                >
-                  <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
-                </svg>
-              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="white"
+                className="w-10 h-10"
+              >
+                <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
+              </svg>
             </a>
             {/* Verified Badge */}
             {/* Uncomment if needed */}
@@ -111,5 +123,5 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
   );
 });
 
-About.displayName = 'About';
+About.displayName = "About";
 export default About;
