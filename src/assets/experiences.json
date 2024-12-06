@@ -14,9 +14,9 @@
         ],
         "toolsAndTechnologies": [
             "JavaScript",
-            "Node JS",
+            "NodeJS",
             "Dynamo DB",
-            "React JS",
+            "React",
             "Ant Design",
             "Redux Toolkit",
             "HTML",
@@ -84,16 +84,16 @@
             "Recruitment and Mentoring of resources"
         ],
         "toolsAndTechnologies": [
-            "Javascript",
+            "JavaScript",
             "NodeJS",
             "NextJS",
-            "MongoDB",
+            "Mongo DB",
             "React",
             "Angular",
-            "Postgresql",
+            "PostgreSQL",
             "Elasticsearch",
             "AWS Services",
-            "DynamoDB"
+            "Dynamo DB"
         ]
     },
     {
@@ -130,7 +130,7 @@
             "Mongo DB",
             "Express JS",
             "Angular JS",
-            "Node JS",
+            "NodeJS",
             "Mocha",
             "Chai",
             "Super Test"

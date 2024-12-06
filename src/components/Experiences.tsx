@@ -32,6 +32,45 @@ interface ExperiencesProps {
   experiences: Experience[];
 }
 
+const techColors: Record<string, string> = {
+  "NodeJS": "hover:bg-green-500 hover:text-white", // Official Node.js green
+  "React": "hover:bg-blue-400 hover:text-white", // React's primary color
+  Angular: "hover:bg-red-600 hover:text-white", // Angular's red
+  JavaScript: "hover:bg-yellow-500 hover:text-black", // JavaScript yellow with black text
+  CSS: "hover:bg-blue-500 hover:text-white", // CSS blue
+  HTML: "hover:bg-orange-500 hover:text-white", // HTML orange
+  "AWS Lambda": "hover:bg-orange-600 hover:text-white", // AWS orange
+  "Mongo DB": "hover:bg-green-500 hover:text-white", // MongoDB green
+  "Dynamo DB": "hover:bg-purple-600 hover:text-white", // DynamoDB purple
+  "Ant Design": "hover:bg-blue-600 hover:text-white", // Ant Design blue
+  "Redux Toolkit": "hover:bg-purple-700 hover:text-white", // Redux purple
+  "Tailwind CSS": "hover:bg-teal-400 hover:text-white", // Tailwind teal
+  "Serverless JS": "hover:bg-orange-500 hover:text-white", // Serverless framework orange
+  "Openai API": "hover:bg-gray-900 hover:text-white", // OpenAI dark gray/black
+  EJS: "hover:bg-yellow-600 hover:text-black", // Yellow for templating
+  "AWS S3": "hover:bg-orange-600 hover:text-white", // AWS orange
+  CloudFront: "hover:bg-gray-500 hover:text-white", // AWS gray theme
+  "Code Commit for Git": "hover:bg-gray-700 hover:text-white", // AWS CodeCommit
+  "AWS SNS & SQS": "hover:bg-orange-500 hover:text-white", // AWS orange
+  "CI/CD using AWS Code Build and Code Pipeline": "hover:bg-blue-800 hover:text-white", // AWS blue
+  Firebase: "hover:bg-yellow-500 hover:text-black", // Firebase yellow
+  Redis: "hover:bg-red-700 hover:text-white", // Redis red
+  "Socket.io": "hover:bg-black hover:text-white", // Socket.io black
+  "Express JS": "hover:bg-gray-600 hover:text-white", // Neutral gray
+  Ionic: "hover:bg-blue-400 hover:text-white", // Ionic blue
+  "Firebase Cloud Functions": "hover:bg-yellow-400 hover:text-black", // Firebase yellow
+  NextJS: "hover:bg-black hover:text-white", // Next.js black
+  PostgreSQL: "hover:bg-blue-600 hover:text-white", // PostgreSQL blue
+  Elasticsearch: "hover:bg-yellow-400 hover:text-black", // Elasticsearch yellow
+  "AWS Services": "hover:bg-orange-600 hover:text-white", // AWS orange
+  "REST API": "hover:bg-gray-500 hover:text-white", // Neutral gray
+  "Angular JS": "hover:bg-red-500 hover:text-white", // Angular red
+  Mocha: "hover:bg-brown-600 hover:text-red-600", // Mocha brown
+  Chai: "hover:bg-red-600 hover:text-white", // Chai red
+  "Super Test": "hover:bg-blue-500 hover:text-white", // Blue for testing
+};
+
+
 const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
   if (!experiences.length) {
     return null; // No experiences to display
@@ -152,39 +191,44 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
         </h2>
       </div>
 
-      {/* Work Summary */}
-      <p className="text-gray-700">{experience.workSummary}</p>
+      <div className="experience-desc mt-6 pb-6 mb-6 ">
+        {/* Work Summary */}
+        <p className="text-gray-700">{experience.workSummary}</p>
 
-      {/* Responsibilities */}
-      {experience?.responsibilities?.length > 0 && (
-        <>
-          <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
-          <ul className="mt-2 list-disc list-indent pl-5 text-gray-700">
-            {experience?.responsibilities?.map((item, idx) => (
-              <li key={idx} className="my-2">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+        {/* Responsibilities */}
+        {experience?.responsibilities?.length > 0 && (
+          <>
+            <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
+            <ul className="mt-2 list-disc list-indent pl-5 text-gray-700">
+              {experience?.responsibilities?.map((item, idx) => (
+                <li key={idx} className="my-2">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
-      {/* Tools and Technologies */}
-      {experience?.toolsAndTechnologies?.length > 0 && (
-        <>
-          <h3 className="text-base font-bold mt-6">Tools and Technologies</h3>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {experience?.toolsAndTechnologies?.map((tech, idx) => (
-              <span
-                key={idx}
-                className="inline-block bg-gray-100 border border-gray-300 rounded-full text-xs px-3 py-1 font-semibold"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </>
-      )}
+        {/* Tools and Technologies */}
+        {experience?.toolsAndTechnologies?.length > 0 && (
+          <>
+            <h3 className="text-base font-bold mt-6">Tools and Technologies</h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {experience?.toolsAndTechnologies?.map((tech, idx) => {
+                const hoverClass = techColors[tech] || "hover:text-gray-500"; // Default gray
+                return (
+                  <span
+                    key={idx}
+                    className={`inline-block  bg-gray-100 border border-gray-300 rounded-full text-xs px-3 py-1 font-semibold cursor-pointer transition-colors duration-200 ${hoverClass}`}
+                  >
+                    {tech}
+                  </span>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   </div>
 );
