@@ -7,6 +7,9 @@ import Projects from './components/Projects'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Experiences from './components/Experiences'
+
+import experiencesData from "./assets/experiences.json";
 
 export default function Portfolio() {
   const aboutRef = useRef<HTMLElement>(null)
@@ -30,6 +33,7 @@ export default function Portfolio() {
       />
       <Hero onProjectsClick={() => scrollTo(projectsRef)} />
       <About ref={aboutRef} />
+      <Experiences experiences={experiencesData} />
       <Skills ref={skillsRef} />
       <Projects ref={projectsRef} />
       <Testimonials ref={testimonialsRef} />
