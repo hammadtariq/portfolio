@@ -1,5 +1,5 @@
-import { forwardRef, useRef } from "react";
-import { Code, Smartphone, Server } from "lucide-react";
+import { forwardRef, useRef } from 'react';
+import { Code, Smartphone, Server } from 'lucide-react';
 
 const About = forwardRef<HTMLElement>((_props, ref) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -111,5 +111,5 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
   );
 });
 
-About.displayName = "About";
+About.displayName = 'About';
 export default About;
