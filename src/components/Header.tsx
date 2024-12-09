@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react'
 interface HeaderProps {
   onAboutClick: () => void
   onSkillsClick: () => void
+  onExperiencesClick: () => void
   onProjectsClick: () => void
   onTestimonialsClick: () => void
   onContactClick: () => void
@@ -13,6 +14,7 @@ export default function Header({
   onAboutClick,
   onSkillsClick,
   onProjectsClick,
+  onExperiencesClick,
   onTestimonialsClick,
   onContactClick,
 }: HeaderProps) {
@@ -28,6 +30,7 @@ export default function Header({
           <button onClick={onAboutClick} className="text-gray-600 hover:text-blue-600">About</button>
           <button onClick={onSkillsClick} className="text-gray-600 hover:text-blue-600">Skills</button>
           <button onClick={onProjectsClick} className="text-gray-600 hover:text-blue-600">Projects</button>
+          <button onClick={onExperiencesClick} className="text-gray-600 hover:text-blue-600">Experiences</button>
           <button onClick={onTestimonialsClick} className="text-gray-600 hover:text-blue-600">Testimonials</button>
           <button onClick={onContactClick} className="text-gray-600 hover:text-blue-600">Contact</button>
         </nav>
@@ -41,6 +44,7 @@ export default function Header({
             <button onClick={() => { onAboutClick(); toggleMenu(); }} className="text-gray-600 hover:text-blue-600">About</button>
             <button onClick={() => { onSkillsClick(); toggleMenu(); }} className="text-gray-600 hover:text-blue-600">Skills</button>
             <button onClick={() => { onProjectsClick(); toggleMenu(); }} className="text-gray-600 hover:text-blue-600">Projects</button>
+            <button onClick={() => { onExperiencesClick(); toggleMenu(); }} className="text-gray-600 hover:text-blue-600">Experiences</button>
             <button onClick={() => { onTestimonialsClick(); toggleMenu(); }} className="text-gray-600 hover:text-blue-600">Testimonials</button>
             <button onClick={() => { onContactClick(); toggleMenu(); }} className="text-gray-600 hover:text-blue-600">Contact</button>
           </div>

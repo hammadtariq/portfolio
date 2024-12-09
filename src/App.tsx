@@ -14,6 +14,7 @@ import experiencesData from "./assets/experiences.json";
 export default function Portfolio() {
   const aboutRef = useRef<HTMLElement>(null)
   const skillsRef = useRef<HTMLElement>(null)
+  const experiencesRef = useRef<HTMLElement>(null)
   const projectsRef = useRef<HTMLElement>(null)
   const testimonialsRef = useRef<HTMLElement>(null)
   const contactRef = useRef<HTMLElement>(null)
@@ -27,15 +28,16 @@ export default function Portfolio() {
       <Header
         onAboutClick={() => scrollTo(aboutRef)}
         onSkillsClick={() => scrollTo(skillsRef)}
-        onProjectsClick={() => scrollTo(projectsRef)}
+        onExperiencesClick={() => scrollTo(experiencesRef)}
         onTestimonialsClick={() => scrollTo(testimonialsRef)}
+        onProjectsClick={() => scrollTo(projectsRef)}
         onContactClick={() => scrollTo(contactRef)}
       />
       <Hero onProjectsClick={() => scrollTo(projectsRef)} />
       <About ref={aboutRef} />
-      <Experiences experiences={experiencesData} />
-      <Skills ref={skillsRef} />
       <Projects ref={projectsRef} />
+      <Skills ref={skillsRef} />
+      <Experiences ref={experiencesRef} experiences={experiencesData} />
       <Testimonials ref={testimonialsRef} />
       <Contact ref={contactRef} />
       <Footer />

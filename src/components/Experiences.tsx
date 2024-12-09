@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 interface Position {
   startDate: string;
@@ -33,8 +33,8 @@ interface ExperiencesProps {
 }
 
 const techColors: Record<string, string> = {
-  "NodeJS": "hover:bg-green-500 hover:text-white", // Official Node.js green
-  "React": "hover:bg-blue-400 hover:text-white", // React's primary color
+  NodeJS: "hover:bg-green-500 hover:text-white", // Official Node.js green
+  React: "hover:bg-blue-400 hover:text-white", // React's primary color
   Angular: "hover:bg-red-600 hover:text-white", // Angular's red
   JavaScript: "hover:bg-yellow-500 hover:text-black", // JavaScript yellow with black text
   CSS: "hover:bg-blue-500 hover:text-white", // CSS blue
@@ -52,7 +52,8 @@ const techColors: Record<string, string> = {
   CloudFront: "hover:bg-gray-500 hover:text-white", // AWS gray theme
   "Code Commit for Git": "hover:bg-gray-700 hover:text-white", // AWS CodeCommit
   "AWS SNS & SQS": "hover:bg-orange-500 hover:text-white", // AWS orange
-  "CI/CD using AWS Code Build and Code Pipeline": "hover:bg-blue-800 hover:text-white", // AWS blue
+  "CI/CD using AWS Code Build and Code Pipeline":
+    "hover:bg-blue-800 hover:text-white", // AWS blue
   Firebase: "hover:bg-yellow-500 hover:text-black", // Firebase yellow
   Redis: "hover:bg-red-700 hover:text-white", // Redis red
   "Socket.io": "hover:bg-black hover:text-white", // Socket.io black
@@ -70,101 +71,41 @@ const techColors: Record<string, string> = {
   "Super Test": "hover:bg-blue-500 hover:text-white", // Blue for testing
 };
 
+const Experiences: React.FC<ExperiencesProps> = forwardRef<HTMLElement>(
+  (_props, ref) => {
+    const { experiences } = _props as any;
+    if (!experiences.length) {
+      return null; // No experiences to display
+    }
 
-const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
-  if (!experiences.length) {
-    return null; // No experiences to display
+    return (
+      <section ref={ref} id="experience" className="py-20 bg-white" data-toggle>
+        <div className="container mx-auto px-4">
+          {/* Section Title */}
+          <div className="flex justify-between">
+            <h2 className="font-bold text-xl">Experiences</h2>
+          </div>
+
+          <div className="content custom-height">
+            <div className="w-100 h-px bg-Gray my-8"></div>
+            {experiences.map((experience, experienceIndex) => (
+              <ExperienceEntry
+                key={experienceIndex}
+                experience={experience}
+                isLast={experienceIndex === experiences.length - 1}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
   }
-
-  return (
-    <section
-      id="experience"
-      className="container bg-white mx-auto mt-2 py-6 px-4 rounded-lg lg:px-10"
-      data-toggle
-    >
-      {/* Section Title */}
-      <div className="flex justify-between">
-        <h2 className="font-bold text-xl">Experiences</h2>
-      </div>
-
-      <div className="content custom-height">
-        <div className="w-100 h-px bg-Gray my-8"></div>
-        {experiences.map((experience, experienceIndex) => (
-          <ExperienceEntry
-            key={experienceIndex}
-            experience={experience}
-            isLast={experienceIndex === experiences.length - 1}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+);
 
 interface ExperienceEntryProps {
   experience: Experience;
   isLast: boolean;
 }
-
-// const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
-//   experience,
-//   isLast,
-// }) => (
-//   <div className="flex space-x-9">
-//     {/* Left Side (Dates) */}
-//     <div className="hidden lg:block lg:w-1/6">
-//       {experience.positions?.map((position, index) => (
-//         <div key={index}>
-//           <h2
-//             className={`text-base font-bold text-EX${Math.min(
-//               index + 1,
-//               3
-//             )} mb-6`}
-//           >
-//             {position.startDate} - {position.endDate || "Present"}
-//           </h2>
-//           {position.note && <p className="text-sm text-EX2">{position.note}</p>}
-//         </div>
-//       ))}
-//     </div>
-
-//     {/* Right Side */}
-//     <div className="w-5/6">
-//       <div>
-//         {/* Titles */}
-//         <div>
-//           {experience.positions?.map((position, index) => (
-//             <div key={index} className="mb-2 lg:mb-0 experience-title-small">
-//               <h2
-//                 className={`text-base font-bold text-EX${Math.min(
-//                   index + 1,
-//                   3
-//                 )} mb-1 block lg:hidden lg:mb-6`}
-//               >
-//                 {position.startDate} - {position.endDate || "Present"}
-//               </h2>
-//               <h2
-//                 className={`text-base font-bold text-EX${Math.min(
-//                   index + 1,
-//                   3
-//                 )} mb-1 experience-title lg:mb-6`}
-//               >
-//                 <span className="block lg:inline-block">{position.title}</span>
-//                 <span className="hidden lg:inline-block"> - </span>
-//                 <span className="block lg:inline-block">
-//                   {experience.companyName} | ({experience.companyDomain})
-//                 </span>
-//               </h2>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Description */}
-//         <ExperienceDescription experience={experience} isLast={isLast} />
-//       </div>
-//     </div>
-//   </div>
-// );
 
 const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
   experience,
@@ -173,7 +114,7 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
   <div className="flex space-x-9">
     {/* Left Side (Dates) */}
     <div className="lg:w-1/6">
-      <div className="p-2 inline-block">
+      <div className="inline-block">
         <h2 className="font-bold text-base">
           {experience.startDate} - {experience.endDate || "Present"}
         </h2>
@@ -185,7 +126,7 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
       {/* Title and Company Info */}
       <div className="mb-4">
         <h2 className="text-base font-bold text-gray-900 flex items-center">
-          <span className="mr-2 text-orange-500">●</span>
+          {/* <span className="mr-2 text-orange-500">●</span> */}
           {experience.title} - {experience.companyName} |{" "}
           {experience.companyDomain}
         </h2>
