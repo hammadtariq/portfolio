@@ -75,7 +75,7 @@ function Media() {
           aria-label="Intro video"
           title="Click to view full video"
         >
-          {isVideoLoaded && <source src="/intro.mp4" type="video/mp4" />}
+          {isVideoLoaded && <source src="/intro-compressed.mp4" type="video/mp4" />}
         </video>
         {/* Play Icon Overlay */}
         <a

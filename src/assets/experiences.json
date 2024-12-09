@@ -1,0 +1,139 @@
+[
+    {
+        "startDate": "Jan 2023",
+        "endDate": "Present",
+        "title": "Technical Lead/Mentor",
+        "companyName": "Talpods",
+        "companyDomain": "Dubai, UAE (Remote)",
+        "workSummary": "Mentored the team through different aspects of career challenges and grew their development skills.",
+        "responsibilities": [
+            "Help overcome challenges the mentee faces in all aspects of his career",
+            "Alleviate the client from hand-holding the mentee",
+            "Accelerate mentee career growth",
+            "Make sure to exhibit best practices and good coding skills"
+        ],
+        "toolsAndTechnologies": [
+            "JavaScript",
+            "NodeJS",
+            "Dynamo DB",
+            "React",
+            "Ant Design",
+            "Redux Toolkit",
+            "HTML",
+            "CSS",
+            "Tailwind CSS",
+            "Serverless JS",
+            "Openai API",
+            "EJS",
+            "AWS Lambda",
+            "AWS S3",
+            "CloudFront",
+            "Code Commit for Git",
+            "AWS SNS & SQS",
+            "CI/CD using AWS Code Build and Code Pipeline"
+        ]
+    },
+    {
+        "startDate": "June 2023",
+        "endDate": "June 2024",
+        "title": "CTO",
+        "companyName": "RingnBring",
+        "companyDomain": "Karachi, Pakistan (Remote)",
+        "workSummary": "Leading the team from the front, performing code reviews, and system design. Ensuring compliance with software development standards and maintaining code quality.",
+        "responsibilities": [
+            "Lead the team from the front, do code reviews, and system design",
+            "Communicate with the cross-department team, gather requirements, and maintain quality of code",
+            "Compliance with the software development standards and processes",
+            "Understand the technical aspects and business flow of the projects",
+            "Validate the technical specification according to business requirements prior to development",
+            "Responsible for the success of the release with respect to the completeness and accuracy of their piece of work",
+            "Make sure to exhibit best practices and good coding skills",
+            "Recruitment and Training of resources"
+        ],
+        "toolsAndTechnologies": [
+            "Angular",
+            "Firebase",
+            "NodeJS",
+            "Redis",
+            "Socket.io",
+            "Express JS",
+            "Ionic",
+            "Firebase Cloud Functions"
+        ],
+        "projects": [
+            {
+                "projectName": "Ring n Bring",
+                "description": "As CTO, I transformed a struggling QR menu app for luxury hotels in the MENA region. The app lets guests order food and services by scanning QR codes in hotel areas. I hired the right talent, streamlined processes and integrated with major POS systems, and payment gateways moreover by implementing key features to compete in this industry and maintaining quality, we boosted monthly revenue from $500k to $10k in 9 months, making the app a reliable and scalable solution for luxury hotels, and enhancing guest experiences significantly.",
+                "link": "https://ringnbring.com/"
+            }
+        ]
+    },
+    {
+        "startDate": "Aug 2021",
+        "endDate": "Dec 2022",
+        "title": "Senior Technical Lead",
+        "companyName": "Nisum",
+        "companyDomain": "Karachi, Pakistan (Onsite)",
+        "workSummary": "Showcased rapid progression from a Software Engineer to Technical Lead, leading code reviews, system design, and ensuring adherence to software development standards.",
+        "responsibilities": [
+            "Progressed rapidly from Software Engineer to Technical Lead, showcasing expertise and leadership",
+            "Led the team in code reviews, system design, and ensured adherence to software development standards",
+            "Compliance with the software development standards and processes",
+            "Effectively communicated with offshore teams, gathered requirements, and maintained code quality",
+            "Demonstrated deep understanding of technical and business aspects, validating specifications and driving successful releases",
+            "Recruitment and Mentoring of resources"
+        ],
+        "toolsAndTechnologies": [
+            "JavaScript",
+            "NodeJS",
+            "NextJS",
+            "Mongo DB",
+            "React",
+            "Angular",
+            "PostgreSQL",
+            "Elasticsearch",
+            "AWS Services",
+            "Dynamo DB"
+        ]
+    },
+    {
+        "startDate": "Jul 2016",
+        "endDate": "Jan 2018",
+        "title": "Software Engineer",
+        "companyName": "Active Capital IT",
+        "companyDomain": "Karachi, Pakistan (Onsite)",
+        "workSummary": "As part of the primary developer's team, contributed to the development and maintenance of Artstor, a U.S product as a frontend and microservices developer.",
+        "responsibilities": [
+            "Part of the primary developer's team of U.S product 'Artstor' as a frontend and microservices developer",
+            "Design, code, and debug its different modules in various software languages",
+            "Support, maintain, and document software functionality",
+            "Follow Behavior-driven development to analyze the user story and write unit test cases",
+            "Performance tuning, improvement, usability, and automation",
+            "Work in an Agile/Scrum methodology environment"
+        ]
+    },
+    {
+        "startDate": "May 2015",
+        "endDate": "Jun 2016",
+        "title": "Software Engineer",
+        "companyName": "Panacloud",
+        "companyDomain": "Karachi, Pakistan (Onsite)",
+        "workSummary": "Developed lightweight, cross-browser, single-page apps using MEAN stack and communicated project progress with clients.",
+        "responsibilities": [
+            "Develop a lightweight, cross-browser, single-page app that talks to REST API",
+            "Develop web apps using MEAN (MongoDB, Express, Angular, Node.js) technologies",
+            "Communicate with clients and update them about project progress",
+            "Write unit tests using a stack of Mocha, Chai and SuperTest"
+        ],
+        "toolsAndTechnologies": [
+            "REST API",
+            "Mongo DB",
+            "Express JS",
+            "Angular JS",
+            "NodeJS",
+            "Mocha",
+            "Chai",
+            "Super Test"
+        ]
+    }
+]
