@@ -34,17 +34,6 @@ body {
   animation: slideIn 0.5s ease-out;
 }
 
-.whatsapp-container {
-  position: fixed;
-  bottom: 80px;
-  right: 15px;
-  z-index: 999;
-  background-color: transparent;
-}
-
-.whatsapp-icon {
-  width: 50px;
-  height: 50px;
 #experience .experience-desc {
   position: relative; /* Ensures the ::before element positions relative to .experience-desc */
 }
@@ -59,4 +48,17 @@ body {
   background-color: #eed9ce;
   position: absolute;
   left: -23px;
+}
+
+.whatsapp-container {
+  position: fixed;
+  bottom: 80px;
+  right: 15px;
+  z-index: 999;
+  background-color: transparent;
+}
+
+.whatsapp-icon {
+  width: 50px;
+  height: 50px;
 }
