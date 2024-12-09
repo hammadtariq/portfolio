@@ -11,8 +11,8 @@ export default function ScheduleCall() {
         className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold flex items-center hover:bg-blue-100 transition duration-300"
         onClick={() => setShowModal(true)}
       >
-        <Phone className="mr-1" size={16} />
-        Schedule Call
+        Schedule a call
+        <Phone className="ml-2" size={16} />
       </button>
       {showModal && (
         <PopupModal
