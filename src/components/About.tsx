@@ -38,14 +38,14 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
           >
             {/* Profile Image */}
             <img
-              src="/profile-dp.webp" // Replace with your profile picture path
+              src="/profile-dp-small.png" // Replace with your profile picture path
               alt="Profile"
               className="w-full h-full rounded-full object-cover border-4 border-blue-600 group-hover:opacity-0 transition-opacity"
             />
             {/* Profile Video */}
             <video
               ref={videoRef}
-              src="/intro.mp4" // Replace with your video path
+              src="/intro-compressed.mp4" // Replace with your video path
               className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
               loop
             />
