@@ -36,9 +36,9 @@ export default function Portfolio() {
       />
       <Hero onProjectsClick={() => scrollTo(projectsRef)} />
       <About ref={aboutRef} />
-      <Projects ref={projectsRef} />
       <Skills ref={skillsRef} />
       <Experiences ref={experiencesRef} experiences={experiencesData} />
+      <Projects ref={projectsRef} />
       <Testimonials ref={testimonialsRef} />
       <Contact ref={contactRef} />
       <Footer />

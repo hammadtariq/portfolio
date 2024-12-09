@@ -29,8 +29,8 @@ export default function Header({
         <nav className="hidden md:flex space-x-6">
           <button onClick={onAboutClick} className="text-gray-600 hover:text-blue-600">About</button>
           <button onClick={onSkillsClick} className="text-gray-600 hover:text-blue-600">Skills</button>
-          <button onClick={onProjectsClick} className="text-gray-600 hover:text-blue-600">Projects</button>
           <button onClick={onExperiencesClick} className="text-gray-600 hover:text-blue-600">Experiences</button>
+          <button onClick={onProjectsClick} className="text-gray-600 hover:text-blue-600">Projects</button>
           <button onClick={onTestimonialsClick} className="text-gray-600 hover:text-blue-600">Testimonials</button>
           <button onClick={onContactClick} className="text-gray-600 hover:text-blue-600">Contact</button>
         </nav>
