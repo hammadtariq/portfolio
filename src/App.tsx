@@ -1,13 +1,14 @@
-import { useRef } from 'react'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Testimonials from './components/Testimonials'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { useRef } from "react";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
 import Experiences from './components/Experiences'
+import Testimonials from "./components/Testimonials";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import WhatsApp from "./components/WhatsApp";
 
 import experiencesData from "./assets/experiences.json";
 
@@ -20,8 +21,8 @@ export default function Portfolio() {
   const contactRef = useRef<HTMLElement>(null)
 
   const scrollTo = (ref: React.RefObject<HTMLElement>) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="bg-gray-50 text-gray-800">
@@ -41,7 +42,7 @@ export default function Portfolio() {
       <Testimonials ref={testimonialsRef} />
       <Contact ref={contactRef} />
       <Footer />
+      <WhatsApp />
     </div>
-  )
+  );
 }
-
