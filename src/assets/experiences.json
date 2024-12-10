@@ -4,43 +4,21 @@
         "endDate": "Present",
         "title": "Technical Lead / Mentor",
         "companyName": "Talpods",
-        "companyDomain": "Dubai, UAE (Remote)",
+        "companyLocation": "Dubai, UAE (Remote)",
         "workSummary": "Mentored the team through different aspects of career challenges and grew their development skills.",
         "responsibilities": [
             "Help overcome challenges the mentee faces in all aspects of his career",
             "Alleviate the client from hand-holding the mentee",
             "Accelerate mentee career growth",
             "Make sure to exhibit best practices and good coding skills"
-        ],
-        "toolsAndTechnologies": [
-            {
-                "category": "Programming Languages & Frameworks",
-                "technologies": ["JavaScript", "NodeJS", "React"]
-            },
-            {
-                "category": "Web Technologies",
-                "technologies": ["HTML", "CSS", "Tailwind CSS", "Jade"]
-            },
-            {
-                "category": "Cloud & DevOps",
-                "technologies": ["Serverless JS", "AWS Lambda", "AWS S3", "CloudFront", "AWS SNS & SQS", "CI/CD using AWS Code Build and Code Pipeline"]
-            },
-            {
-                "category": "Databases & Tools",
-                "technologies": ["Dynamo DB", "Code Commit for Git"]
-            },
-            {
-                "category": "APIs & Libraries",
-                "technologies": ["Ant Design", "Redux Toolkit", "Openai API"]
-            }
         ]
     },
     {
         "startDate": "June 2023",
         "endDate": "June 2024",
         "title": "CTO",
-        "companyName": "RingnBring",
-        "companyDomain": "Karachi, Pakistan (Remote)",
+        "companyName": "RingNBring",
+        "companyLocation": "Dubai, UAE (Remote)",
         "workSummary": "Leading the team from the front, performing code reviews, and system design. Ensuring compliance with software development standards and maintaining code quality.",
         "responsibilities": [
             "Lead the team from the front, do code reviews, and system design",
@@ -51,20 +29,6 @@
             "Responsible for the success of the release with respect to the completeness and accuracy of their piece of work",
             "Make sure to exhibit best practices and good coding skills",
             "Recruitment and Training of resources"
-        ],
-        "toolsAndTechnologies": [
-            {
-                "category": "Programming Languages & Frameworks",
-                "technologies": ["Angular", "NodeJS"]
-            },
-            {
-                "category": "Web Technologies",
-                "technologies": ["Firebase", "Ionic"]
-            },
-            {
-                "category": "Databases & Tools",
-                "technologies": ["Redis", "Socket.io", "Express JS", "Firebase Cloud Functions"]
-            }
         ]
     },
     {
@@ -72,7 +36,7 @@
         "endDate": "Dec 2022",
         "title": "Senior Technical Lead",
         "companyName": "Nisum",
-        "companyDomain": "Karachi, Pakistan (Onsite)",
+        "companyLocation": "Karachi, Pakistan (Onsite)",
         "workSummary": "Showcased rapid progression from a Software Engineer to Technical Lead, leading code reviews, system design, and ensuring adherence to software development standards.",
         "responsibilities": [
             "Progressed rapidly from Software Engineer to Technical Lead, showcasing expertise and leadership",
@@ -81,32 +45,42 @@
             "Effectively communicated with offshore teams, gathered requirements, and maintained code quality",
             "Demonstrated deep understanding of technical and business aspects, validating specifications and driving successful releases",
             "Recruitment and Mentoring of resources"
-        ],
-        "toolsAndTechnologies": [
-            {
-                "category": "Programming Languages & Frameworks",
-                "technologies": ["JavaScript", "NodeJS", "React", "Angular"]
-            },
-            {
-                "category": "Web Technologies",
-                "technologies": ["NextJS"]
-            },
-            {
-                "category": "Databases & Tools",
-                "technologies": ["Mongo DB", "PostgreSQL", "Elasticsearch", "Dynamo DB"]
-            },
-            {
-                "category": "Cloud & DevOps",
-                "technologies": ["AWS Services"]
-            }
         ]
+    },
+    {
+        "startDate": "Apr 2021",
+        "endDate": "Aug 2021",
+        "title": "Technical Lead",
+        "companyName": "Nisum",
+        "companyLocation": "Karachi, Pakistan (Onsite)"
+    },
+    {
+        "startDate": "Sep 2020",
+        "endDate": "Mar 2021",
+        "title": "Principal Software Engineer",
+        "companyName": "Nisum",
+        "companyLocation": "Karachi, Pakistan (Onsite)"
+    },
+    {
+        "startDate": "Feb 2019",
+        "endDate": "Mar 2020",
+        "title": "Senior Software Engineer",
+        "companyName": "Nisum",
+        "companyLocation": "Karachi, Pakistan (Onsite)"
+    },
+    {
+        "startDate": "Feb 2018",
+        "endDate": "Mar 2019",
+        "title": "Software Engineer",
+        "companyName": "Nisum",
+        "companyLocation": "Karachi, Pakistan (Onsite)"
     },
     {
         "startDate": "Jul 2016",
         "endDate": "Jan 2018",
         "title": "Software Engineer",
         "companyName": "Active Capital IT",
-        "companyDomain": "Karachi, Pakistan (Onsite)",
+        "companyLocation": "Karachi, Pakistan (Onsite)",
         "workSummary": "As part of the primary developer's team, contributed to the development and maintenance of Artstor, a U.S product as a frontend and microservices developer.",
         "responsibilities": [
             "Part of the primary developer's team of U.S product 'Artstor' as a frontend and microservices developer",
@@ -115,12 +89,6 @@
             "Follow Behavior-driven development to analyze the user story and write unit test cases",
             "Performance tuning, improvement, usability, and automation",
             "Work in an Agile/Scrum methodology environment"
-        ],
-        "toolsAndTechnologies": [
-            {
-                "category": "Testing & QA",
-                "technologies": ["Behavior-driven development", "Mocha", "Chai", "Super Test"]
-            }
         ]
     },
     {
@@ -128,27 +96,13 @@
         "endDate": "Jun 2016",
         "title": "Software Engineer",
         "companyName": "Panacloud",
-        "companyDomain": "Karachi, Pakistan (Onsite)",
+        "companyLocation": "Karachi, Pakistan (Onsite)",
         "workSummary": "Developed lightweight, cross-browser, single-page apps using MEAN stack and communicated project progress with clients.",
         "responsibilities": [
             "Develop a lightweight, cross-browser, single-page app that talks to REST API",
             "Develop web apps using MEAN (MongoDB, Express, Angular, Node.js) technologies",
             "Communicate with clients and update them about project progress",
             "Write unit tests using a stack of Mocha, Chai and SuperTest"
-        ],
-        "toolsAndTechnologies": [
-            {
-                "category": "Programming Languages & Frameworks",
-                "technologies": ["NodeJS", "Angular JS"]
-            },
-            {
-                "category": "Databases & Tools",
-                "technologies": ["Mongo DB", "Express JS"]
-            },
-            {
-                "category": "Testing & QA",
-                "technologies": ["Mocha", "Chai", "Super Test"]
-            }
         ]
     }
 ]

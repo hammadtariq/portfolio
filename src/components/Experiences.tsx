@@ -20,7 +20,7 @@ interface Experience {
   endDate?: string;
   title: string;
   companyName: string;
-  companyDomain: string;
+  companyLocation: string;
   workSummary: string;
   responsibilities: string[];
   toolsAndTechnologies?: ToolsAndTech[];
@@ -104,9 +104,9 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
 
       {/* Title and Company Info */}
       <div className="mb-4">
-        <h2 className="text-base font-bold text-gray-900 flex items-center underline">
+        <h2 className="text-base font-bold text-gray-900 flex items-center">
           {experience.title} - {experience.companyName} |{" "}
-          {experience.companyDomain}:
+          {experience.companyLocation}
         </h2>
       </div>
 
@@ -122,11 +122,11 @@ const ExperienceDescription: React.FC<ExperienceDescriptionProps> = ({
 }) => (
   <div className={`experience-desc mt-6 pb-6 ${!isLast ? "mb-6" : ""}`}>
     <p>{experience.workSummary}</p>
-    {experience.responsibilities.length > 0 && (
+    {experience?.responsibilities?.length > 0 && (
       <>
-        <h3 className="text-base font-bold mt-6 underline">Responsibilities:</h3>
+        <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
         <ul className="mt-2 list-disc list-indent pl-2 ml-4">
-          {experience.responsibilities.map((item, idx) => (
+          {experience?.responsibilities?.map((item, idx) => (
             <li key={idx} className="my-2">
               {item}
             </li>
