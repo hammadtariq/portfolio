@@ -4,14 +4,7 @@ import LazyLoadImg, { ImageLoading } from "./LazyLoadImg";
 function Media() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-
-  // Handle the click event to open the video in a new tab
-  const handleVideoClick = useCallback(() => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    window.open("/intro.mp4", "_blank");
-  }, []);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // Play the video when hovered
   const handleMouseEnter = useCallback(() => {
@@ -25,6 +18,16 @@ function Media() {
     if (videoRef.current) {
       videoRef.current.pause();
     }
+  }, []);
+
+  // Handle video click to open popup
+  const handleVideoClick = useCallback(() => {
+    setIsPopupOpen(true);
+  }, []);
+
+  // Close popup
+  const handleClosePopup = useCallback(() => {
+    setIsPopupOpen(false);
   }, []);
 
   useEffect(() => {
@@ -59,8 +62,8 @@ function Media() {
         onMouseLeave={handleMouseLeave}
       >
         <LazyLoadImg
-          src="/profile-dp.webp" // Replace with your profile picture path
-          alt="Profile" // Accessible alt text for the image
+          src="/profile-dp.webp"
+          alt="Profile"
           classNames="w-full h-full rounded-full object-cover border-4 border-blue-600 group-hover:opacity-0 transition-opacity"
           load={ImageLoading.Eager}
         />
@@ -81,11 +84,8 @@ function Media() {
           )}
         </video>
         {/* Play Icon Overlay */}
-        <a
-          href="/intro.mp4"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleVideoClick} // Stop video and open it in a new tab
+        <button
+          onClick={handleVideoClick}
           className="absolute inset-0 flex items-center justify-center rounded-full opacity-100 transition-opacity group-hover:opacity-0"
         >
           <svg
@@ -96,8 +96,27 @@ function Media() {
           >
             <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
           </svg>
-        </a>
+        </button>
       </div>
+
+      {isPopupOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+          onClick={handleClosePopup}
+        >
+          <div
+            className="bg-white rounded-lg overflow-hidden w-11/12 md:w-2/3 lg:w-1/2 relative"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+          >
+            <video
+              controls
+              autoPlay
+              className="w-full"
+              src="/intro.mp4"
+            ></video>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
