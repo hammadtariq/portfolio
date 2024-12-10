@@ -21,8 +21,8 @@ interface Experience {
   title: string;
   companyName: string;
   companyLocation: string;
-  workSummary: string;
-  responsibilities: string[];
+  workSummary?: string;
+  responsibilities?: string[];
   toolsAndTechnologies?: ToolsAndTech[];
   positions?: Position[];
   projects?: Project[];
@@ -47,7 +47,6 @@ interface ExperienceDescriptionProps {
   isLast: boolean;
 }
 
-
 const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
   (props: ExperiencesProps, ref: React.ForwardedRef<HTMLElement>) => {
     const { experiences } = props;
@@ -57,11 +56,13 @@ const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
 
     return (
       <section ref={ref} id="experience" className="py-20 bg-white" data-toggle>
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Experiences</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          Experiences
+        </h2>
         <div className="container mx-auto px-4">
           {/* Section Title */}
-          <div className="flex justify-between">
-          </div>
+          {/* <div className="flex justify-between">
+          </div> */}
 
           <div className="content custom-height">
             <div className="w-100 h-px bg-Gray my-8"></div>
@@ -104,7 +105,7 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
 
       {/* Title and Company Info */}
       <div className="mb-4">
-        <h2 className="text-base font-bold text-gray-900 flex items-center">
+        <h2 className="text-base font-bold text-gray-900 flex items-center experience-title">
           {experience.title} - {experience.companyName} |{" "}
           {experience.companyLocation}
         </h2>
@@ -120,22 +121,22 @@ const ExperienceDescription: React.FC<ExperienceDescriptionProps> = ({
   experience,
   isLast,
 }) => (
-  <div className={`experience-desc mt-6 pb-6 ${!isLast ? "mb-6" : ""}`}>
+  <div className={`experience-desc md:mt-5 md:pb-5 ${!isLast ? "mb-6" : ""}`}>
     <p>{experience.workSummary}</p>
-    {experience?.responsibilities?.length > 0 && (
-      <>
-        <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
-        <ul className="mt-2 list-disc list-indent pl-2 ml-4">
-          {experience?.responsibilities?.map((item, idx) => (
-            <li key={idx} className="my-2">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </>
-    )}
+    {experience?.responsibilities &&
+      experience?.responsibilities?.length > 0 && (
+        <>
+          <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
+          <ul className="mt-2 list-disc list-indent pl-2 ml-4">
+            {experience?.responsibilities?.map((item, idx) => (
+              <li key={idx} className="my-2">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
   </div>
 );
-
 
 export default Experiences;
