@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import LazyLoadImg from "./LazyLoadImg";
 
 interface Position {
   startDate: string;
@@ -23,57 +24,335 @@ interface Experience {
   companyDomain: string;
   workSummary: string;
   responsibilities: string[];
-  toolsAndTechnologies: string[];
+  toolsAndTechnologies?: ToolsAndTech[];
   positions?: Position[];
   projects?: Project[];
+}
+
+interface ToolsAndTech {
+  category: string;
+  technologies: string[];
 }
 
 interface ExperiencesProps {
   experiences: Experience[];
 }
 
-const techColors: Record<string, string> = {
-  NodeJS: "hover:bg-green-500 hover:text-white", // Official Node.js green
-  React: "hover:bg-blue-400 hover:text-white", // React's primary color
-  Angular: "hover:bg-red-600 hover:text-white", // Angular's red
-  JavaScript: "hover:bg-yellow-500 hover:text-black", // JavaScript yellow with black text
-  CSS: "hover:bg-blue-500 hover:text-white", // CSS blue
-  HTML: "hover:bg-orange-500 hover:text-white", // HTML orange
-  "AWS Lambda": "hover:bg-orange-600 hover:text-white", // AWS orange
-  "Mongo DB": "hover:bg-green-500 hover:text-white", // MongoDB green
-  "Dynamo DB": "hover:bg-purple-600 hover:text-white", // DynamoDB purple
-  "Ant Design": "hover:bg-blue-600 hover:text-white", // Ant Design blue
-  "Redux Toolkit": "hover:bg-purple-700 hover:text-white", // Redux purple
-  "Tailwind CSS": "hover:bg-teal-400 hover:text-white", // Tailwind teal
-  "Serverless JS": "hover:bg-orange-500 hover:text-white", // Serverless framework orange
-  "Openai API": "hover:bg-gray-900 hover:text-white", // OpenAI dark gray/black
-  EJS: "hover:bg-yellow-600 hover:text-black", // Yellow for templating
-  "AWS S3": "hover:bg-orange-600 hover:text-white", // AWS orange
-  CloudFront: "hover:bg-gray-500 hover:text-white", // AWS gray theme
-  "Code Commit for Git": "hover:bg-gray-700 hover:text-white", // AWS CodeCommit
-  "AWS SNS & SQS": "hover:bg-orange-500 hover:text-white", // AWS orange
-  "CI/CD using AWS Code Build and Code Pipeline":
-    "hover:bg-blue-800 hover:text-white", // AWS blue
-  Firebase: "hover:bg-yellow-500 hover:text-black", // Firebase yellow
-  Redis: "hover:bg-red-700 hover:text-white", // Redis red
-  "Socket.io": "hover:bg-black hover:text-white", // Socket.io black
-  "Express JS": "hover:bg-gray-600 hover:text-white", // Neutral gray
-  Ionic: "hover:bg-blue-400 hover:text-white", // Ionic blue
-  "Firebase Cloud Functions": "hover:bg-yellow-400 hover:text-black", // Firebase yellow
-  NextJS: "hover:bg-black hover:text-white", // Next.js black
-  PostgreSQL: "hover:bg-blue-600 hover:text-white", // PostgreSQL blue
-  Elasticsearch: "hover:bg-yellow-400 hover:text-black", // Elasticsearch yellow
-  "AWS Services": "hover:bg-orange-600 hover:text-white", // AWS orange
-  "REST API": "hover:bg-gray-500 hover:text-white", // Neutral gray
-  "Angular JS": "hover:bg-red-500 hover:text-white", // Angular red
-  Mocha: "hover:bg-brown-600 hover:text-red-600", // Mocha brown
-  Chai: "hover:bg-red-600 hover:text-white", // Chai red
-  "Super Test": "hover:bg-blue-500 hover:text-white", // Blue for testing
+interface ExperienceEntryProps {
+  experience: Experience;
+  isLast: boolean;
+}
+
+interface ExperienceDescriptionProps {
+  experience: Experience;
+  isLast: boolean;
+}
+
+interface ToolProps {
+  tech: string;
+}
+
+const techConfig: Record<string, { icon: JSX.Element; hoverClass: string }> = {
+  NodeJS: {
+    icon: (
+      <LazyLoadImg
+        src="/node-js.svg"
+        alt="Node.js logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-green-500 hover:text-white",
+  },
+  React: {
+    icon: (
+      <LazyLoadImg src="/react.svg" alt="React logo" classNames="w-11 h-7" />
+    ),
+    hoverClass: "hover:bg-blue-400 hover:text-white",
+  },
+  Angular: {
+    icon: (
+      <LazyLoadImg
+        src="/angular.svg"
+        alt="Angular logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-red-600 hover:text-white",
+  },
+  JavaScript: {
+    icon: (
+      <LazyLoadImg src="/js.svg" alt="JavaScript logo" classNames="w-11 h-7" />
+    ),
+    hoverClass: "hover:bg-yellow-500 hover:text-black",
+  },
+  CSS: {
+    icon: <LazyLoadImg src="/css.svg" alt="CSS logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-blue-500 hover:text-white",
+  },
+  HTML: {
+    icon: <LazyLoadImg src="/html.svg" alt="HTML logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-orange-500 hover:text-white",
+  },
+  "AWS Lambda": {
+    icon: (
+      <LazyLoadImg
+        src="/aws-lambda.svg"
+        alt="AWS Lambda logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-orange-600 hover:text-white",
+  },
+  "Mongo DB": {
+    icon: (
+      <LazyLoadImg
+        src="/mongodb.svg"
+        alt="MongoDB logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-green-500 hover:text-white",
+  },
+  "Dynamo DB": {
+    icon: (
+      <LazyLoadImg
+        src="/dynamodb.svg"
+        alt="DynamoDB logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-purple-600 hover:text-white",
+  },
+  "Ant Design": {
+    icon: (
+      <LazyLoadImg
+        src="/ant-d.svg"
+        alt="Ant Design logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-blue-600 hover:text-white",
+  },
+  "Redux Toolkit": {
+    icon: (
+      <LazyLoadImg src="/redux.svg" alt="Redux logo" classNames="w-11 h-7" />
+    ),
+    hoverClass: "hover:bg-purple-300 hover:text-purple-700",
+  },
+  "Tailwind CSS": {
+    icon: (
+      <LazyLoadImg
+        src="/tailwindcss.svg"
+        alt="Tailwind CSS logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-teal-400 hover:text-white",
+  },
+  "Serverless JS": {
+    icon: (
+      <LazyLoadImg
+        src="/serverless-js.svg"
+        alt="Serverless JS logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-orange-500 hover:text-white",
+  },
+  "Openai API": {
+    icon: (
+      <LazyLoadImg
+        src="/openai-icon.svg"
+        alt="OpenAI logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-gray-600 hover:text-white",
+  },
+  Jade: {
+    icon: <LazyLoadImg src="/jade.svg" alt="Jade logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-yellow-600 hover:text-black",
+  },
+  "AWS S3": {
+    icon: <LazyLoadImg src="/s3.svg" alt="AWS S3 logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-orange-600 hover:text-white",
+  },
+  CloudFront: {
+    icon: (
+      <LazyLoadImg
+        src="/cloudfront.svg"
+        alt="CloudFront logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-orange-600 hover:text-white",
+  },
+  "Code Commit for Git": {
+    icon: (
+      <LazyLoadImg
+        src="/code-commit.svg"
+        alt="Code Commit logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-gray-700 hover:text-white",
+  },
+  "AWS SNS & SQS": {
+    icon: (
+      <LazyLoadImg
+        src="/aws-sns.svg"
+        alt="AWS SNS & SQS logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-pink-400 hover:text-white",
+  },
+  "CI/CD using AWS Code Build and Code Pipeline": {
+    icon: (
+      <LazyLoadImg
+        src="/aws-sqs.svg"
+        alt="AWS SQS logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-yellow-600 hover:text-white",
+  },
+  Firebase: {
+    icon: (
+      <LazyLoadImg
+        src="/firebase.svg"
+        alt="Firebase logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-yellow-500 hover:text-black",
+  },
+  Redis: {
+    icon: (
+      <LazyLoadImg src="/redis.svg" alt="Redis logo" classNames="w-11 h-7" />
+    ),
+    hoverClass: "hover:bg-red-700 hover:text-white",
+  },
+  "Socket.io": {
+    icon: (
+      <LazyLoadImg
+        src="/socket-io.svg"
+        alt="Socket.io logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-gray-600 hover:text-white",
+  },
+  "Express JS": {
+    icon: (
+      <LazyLoadImg
+        src="/express-js.svg"
+        alt="Express JS logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass:
+      "hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:text-white",
+  },
+  Ionic: {
+    icon: (
+      <LazyLoadImg src="/ionic.svg" alt="Ionic logo" classNames="w-11 h-7" />
+    ),
+    hoverClass: "hover:bg-blue-400 hover:text-white",
+  },
+  "Firebase Cloud Functions": {
+    icon: (
+      <LazyLoadImg
+        src="/firebase.svg"
+        alt="Firebase Cloud Functions logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-yellow-400 hover:text-black",
+  },
+  NextJS: {
+    icon: (
+      <LazyLoadImg
+        src="/next-js.svg"
+        alt="Next.js logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-gray-500 hover:text-white",
+  },
+  PostgreSQL: {
+    icon: (
+      <LazyLoadImg
+        src="/postgres.svg"
+        alt="PostgreSQL logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-blue-600 hover:text-white",
+  },
+  Elasticsearch: {
+    icon: (
+      <LazyLoadImg
+        src="/elasticsearch.svg"
+        alt="Elasticsearch logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-yellow-400 hover:text-black",
+  },
+  "AWS Services": {
+    icon: <LazyLoadImg src="/aws.svg" alt="AWS logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-orange-600 hover:text-white",
+  },
+  "REST API": {
+    icon: (
+      <LazyLoadImg
+        src="/rest-api.svg"
+        alt="REST API logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-gray-500 hover:text-white",
+  },
+  "Angular JS": {
+    icon: (
+      <LazyLoadImg
+        src="/angular.svg"
+        alt="AngularJS logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-red-500 hover:text-white",
+  },
+  Mocha: {
+    icon: (
+      <LazyLoadImg src="/mocha.svg" alt="Mocha logo" classNames="w-11 h-7" />
+    ),
+    hoverClass: "hover:bg-amber-900 hover:text-red-100",
+  },
+  Chai: {
+    icon: <LazyLoadImg src="/chai.svg" alt="Chai logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-red-600 hover:text-white",
+  },
+  "Super Test": {
+    icon: (
+      <LazyLoadImg
+        src="/super-test.svg"
+        alt="Super Test logo"
+        classNames="w-11 h-7"
+      />
+    ),
+    hoverClass: "hover:bg-blue-500 hover:text-white",
+  },
+  "Behavior-driven development": {
+    icon: <LazyLoadImg src="/bdd.svg" alt="BDD logo" classNames="w-11 h-7" />,
+    hoverClass: "hover:bg-gray-500 hover:text-white",
+  },
 };
 
-const Experiences: React.FC<ExperiencesProps> = forwardRef<HTMLElement>(
-  (_props, ref) => {
-    const { experiences } = _props as any;
+const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
+  (props: ExperiencesProps, ref: React.ForwardedRef<HTMLElement>) => {
+    const { experiences } = props;
     if (!experiences.length) {
       return null; // No experiences to display
     }
@@ -102,18 +381,13 @@ const Experiences: React.FC<ExperiencesProps> = forwardRef<HTMLElement>(
   }
 );
 
-interface ExperienceEntryProps {
-  experience: Experience;
-  isLast: boolean;
-}
-
 const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
   experience,
   isLast,
 }) => (
-  <div className="flex space-x-9">
+  <div className="flex flex-col lg:flex-row lg:space-x-9">
     {/* Left Side (Dates) */}
-    <div className="lg:w-1/6">
+    <div className="lg:w-1/6 hidden lg:block">
       <div className="inline-block">
         <h2 className="font-bold text-base">
           {experience.startDate} - {experience.endDate || "Present"}
@@ -122,62 +396,27 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
     </div>
 
     {/* Right Side */}
-    <div className="w-5/6">
+    <div className="w-full lg:w-5/6">
+      {/* Dates on top for mobile */}
+      <div className="block lg:hidden mb-2">
+        <h2 className="font-bold text-base">
+          {experience.startDate} - {experience.endDate || "Present"}
+        </h2>
+      </div>
+
       {/* Title and Company Info */}
       <div className="mb-4">
         <h2 className="text-base font-bold text-gray-900 flex items-center">
-          {/* <span className="mr-2 text-orange-500">●</span> */}
           {experience.title} - {experience.companyName} |{" "}
           {experience.companyDomain}
         </h2>
       </div>
 
-      <div className="experience-desc mt-6 pb-6 mb-6 ">
-        {/* Work Summary */}
-        <p className="text-gray-700">{experience.workSummary}</p>
-
-        {/* Responsibilities */}
-        {experience?.responsibilities?.length > 0 && (
-          <>
-            <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
-            <ul className="mt-2 list-disc list-indent pl-5 text-gray-700">
-              {experience?.responsibilities?.map((item, idx) => (
-                <li key={idx} className="my-2">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-
-        {/* Tools and Technologies */}
-        {experience?.toolsAndTechnologies?.length > 0 && (
-          <>
-            <h3 className="text-base font-bold mt-6">Tools and Technologies</h3>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {experience?.toolsAndTechnologies?.map((tech, idx) => {
-                const hoverClass = techColors[tech] || "hover:text-gray-500"; // Default gray
-                return (
-                  <span
-                    key={idx}
-                    className={`inline-block  bg-gray-100 border border-gray-300 rounded-full text-xs px-3 py-1 font-semibold cursor-pointer transition-colors duration-200 ${hoverClass}`}
-                  >
-                    {tech}
-                  </span>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </div>
+      {/* Tools and Technologies */}
+      <ExperienceDescription experience={experience} isLast={isLast} />
     </div>
   </div>
 );
-
-interface ExperienceDescriptionProps {
-  experience: Experience;
-  isLast: boolean;
-}
 
 const ExperienceDescription: React.FC<ExperienceDescriptionProps> = ({
   experience,
@@ -197,81 +436,55 @@ const ExperienceDescription: React.FC<ExperienceDescriptionProps> = ({
         </ul>
       </>
     )}
-    {experience?.toolsAndTechnologies?.length > 0 && (
-      <>
-        <h3 className="text-base font-bold mt-6 mb-3">
-          Tools and Technologies
-        </h3>
-        <div>
-          {experience?.toolsAndTechnologies?.map((tech, idx) => (
-            <span
-              key={idx}
-              className="inline-block border-2 border-Gray rounded-full text-xs py-1 px-2 font-bold mb-2"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </>
-    )}
-    {experience.projects && experience.projects.length > 0 && (
-      <ProjectsSection projects={experience.projects} />
-    )}
+    {experience?.toolsAndTechnologies &&
+      experience.toolsAndTechnologies.length > 0 && (
+        <>
+          <h3 className="text-base font-bold mt-6">Tools and Technologies</h3>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {experience?.toolsAndTechnologies &&
+              experience.toolsAndTechnologies.length > 0 && (
+                <>
+                  <div className="mt-2">
+                    {experience.toolsAndTechnologies.map((category, idx) => (
+                      <div key={idx} className="mb-4 italic">
+                        <h4 className="font-semibold text-base mb-2">
+                          {category.category}:
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {category.technologies.map((tech, techIdx) => (
+                            <Tool key={techIdx} tech={tech} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+          </div>
+        </>
+      )}
   </div>
 );
 
-interface ProjectsSectionProps {
-  projects: Project[];
-}
+const Tool: React.FC<ToolProps> = ({ tech }) => {
+  const techItem = techConfig[tech];
+  const hoverClass = techItem?.hoverClass;
+  const icon = techItem?.icon;
 
-const ProjectsSection: React.FC<ProjectsSectionProps> = ({ projects = [] }) => (
-  <div className="bg-LightPurple py-6 px-4 mt-5 rounded-md">
-    <h3 className="text-base font-bold">Projects:</h3>
-    {projects.map((project, index) => (
-      <div key={index} className="flex mt-2">
-        <span className="inline-block mr-4 font-normal">{index + 1}</span>
-        <div>
-          <div>
-            <span className="text-base font-bold">{project.projectName}</span>
-          </div>
-          <p className="mt-2">{project.description}</p>
-          {project?.responsibilities?.length > 0 && (
-            <>
-              <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
-              <ul className="mb-6 list-disc list-indent pl-2 ml-4">
-                {project?.responsibilities?.map((resp, idx) => (
-                  <li key={idx} className="my-2">
-                    {resp}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          <div className="flex">
-            <span className="font-bold mr-3">Link:</span>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-Primary font-semibold"
-            >
-              {project.link}
-            </a>
-          </div>
-          <div className="mt-2">
-            {project?.technologies?.map((tech, idx) => (
-              <span
-                key={idx}
-                className="inline-block border-2 border-Gray rounded-full text-xs py-1 px-2 font-bold mb-2"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
+  return (
+    <span
+      className={`flex justify-center items-center bg-gray-100 border border-gray-300 rounded-full text-xs px-3 py-1 font-semibold cursor-pointer transition-colors duration-200 ${hoverClass} flex-shrink-0`}
+    >
+      {icon ? (
+        <>
+          {icon}
+          {icon?.props?.src && <span className="ml-1">{tech}</span>}
+        </>
+      ) : (
+        <span className="ml-1">{tech}</span>
+      )}
+    </span>
+  );
+};
 
 export default Experiences;

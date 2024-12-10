@@ -13,24 +13,26 @@
             "Make sure to exhibit best practices and good coding skills"
         ],
         "toolsAndTechnologies": [
-            "JavaScript",
-            "NodeJS",
-            "Dynamo DB",
-            "React",
-            "Ant Design",
-            "Redux Toolkit",
-            "HTML",
-            "CSS",
-            "Tailwind CSS",
-            "Serverless JS",
-            "Openai API",
-            "EJS",
-            "AWS Lambda",
-            "AWS S3",
-            "CloudFront",
-            "Code Commit for Git",
-            "AWS SNS & SQS",
-            "CI/CD using AWS Code Build and Code Pipeline"
+            {
+                "category": "Programming Languages & Frameworks",
+                "technologies": ["JavaScript", "NodeJS", "React"]
+            },
+            {
+                "category": "Web Technologies",
+                "technologies": ["HTML", "CSS", "Tailwind CSS", "Jade"]
+            },
+            {
+                "category": "Cloud & DevOps",
+                "technologies": ["Serverless JS", "AWS Lambda", "AWS S3", "CloudFront", "AWS SNS & SQS", "CI/CD using AWS Code Build and Code Pipeline"]
+            },
+            {
+                "category": "Databases & Tools",
+                "technologies": ["Dynamo DB", "Code Commit for Git"]
+            },
+            {
+                "category": "APIs & Libraries",
+                "technologies": ["Ant Design", "Redux Toolkit", "Openai API"]
+            }
         ]
     },
     {
@@ -51,20 +53,17 @@
             "Recruitment and Training of resources"
         ],
         "toolsAndTechnologies": [
-            "Angular",
-            "Firebase",
-            "NodeJS",
-            "Redis",
-            "Socket.io",
-            "Express JS",
-            "Ionic",
-            "Firebase Cloud Functions"
-        ],
-        "projects": [
             {
-                "projectName": "Ring n Bring",
-                "description": "As CTO, I transformed a struggling QR menu app for luxury hotels in the MENA region. The app lets guests order food and services by scanning QR codes in hotel areas. I hired the right talent, streamlined processes and integrated with major POS systems, and payment gateways moreover by implementing key features to compete in this industry and maintaining quality, we boosted monthly revenue from $500k to $10k in 9 months, making the app a reliable and scalable solution for luxury hotels, and enhancing guest experiences significantly.",
-                "link": "https://ringnbring.com/"
+                "category": "Programming Languages & Frameworks",
+                "technologies": ["Angular", "NodeJS"]
+            },
+            {
+                "category": "Web Technologies",
+                "technologies": ["Firebase", "Ionic"]
+            },
+            {
+                "category": "Databases & Tools",
+                "technologies": ["Redis", "Socket.io", "Express JS", "Firebase Cloud Functions"]
             }
         ]
     },
@@ -84,16 +83,22 @@
             "Recruitment and Mentoring of resources"
         ],
         "toolsAndTechnologies": [
-            "JavaScript",
-            "NodeJS",
-            "NextJS",
-            "Mongo DB",
-            "React",
-            "Angular",
-            "PostgreSQL",
-            "Elasticsearch",
-            "AWS Services",
-            "Dynamo DB"
+            {
+                "category": "Programming Languages & Frameworks",
+                "technologies": ["JavaScript", "NodeJS", "React", "Angular"]
+            },
+            {
+                "category": "Web Technologies",
+                "technologies": ["NextJS"]
+            },
+            {
+                "category": "Databases & Tools",
+                "technologies": ["Mongo DB", "PostgreSQL", "Elasticsearch", "Dynamo DB"]
+            },
+            {
+                "category": "Cloud & DevOps",
+                "technologies": ["AWS Services"]
+            }
         ]
     },
     {
@@ -110,6 +115,12 @@
             "Follow Behavior-driven development to analyze the user story and write unit test cases",
             "Performance tuning, improvement, usability, and automation",
             "Work in an Agile/Scrum methodology environment"
+        ],
+        "toolsAndTechnologies": [
+            {
+                "category": "Testing & QA",
+                "technologies": ["Behavior-driven development", "Mocha", "Chai", "Super Test"]
+            }
         ]
     },
     {
@@ -126,14 +137,18 @@
             "Write unit tests using a stack of Mocha, Chai and SuperTest"
         ],
         "toolsAndTechnologies": [
-            "REST API",
-            "Mongo DB",
-            "Express JS",
-            "Angular JS",
-            "NodeJS",
-            "Mocha",
-            "Chai",
-            "Super Test"
+            {
+                "category": "Programming Languages & Frameworks",
+                "technologies": ["NodeJS", "Angular JS"]
+            },
+            {
+                "category": "Databases & Tools",
+                "technologies": ["Mongo DB", "Express JS"]
+            },
+            {
+                "category": "Testing & QA",
+                "technologies": ["Mocha", "Chai", "Super Test"]
+            }
         ]
     }
 ]

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import LazyLoadImg, { ImageLoading } from "./LazyLoadImg";
 
 function Media() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -57,11 +58,11 @@ function Media() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <img
+        <LazyLoadImg
           src="/profile-dp.webp" // Replace with your profile picture path
           alt="Profile" // Accessible alt text for the image
-          loading="lazy" // Lazy-load image
-          className="w-full h-full rounded-full object-cover border-4 border-blue-600 group-hover:opacity-0 transition-opacity"
+          classNames="w-full h-full rounded-full object-cover border-4 border-blue-600 group-hover:opacity-0 transition-opacity"
+          load={ImageLoading.Eager}
         />
         {/* Render the video element only after it's in view */}
         <video
@@ -75,7 +76,9 @@ function Media() {
           aria-label="Intro video"
           title="Click to view full video"
         >
-          {isVideoLoaded && <source src="/intro-compressed.mp4" type="video/mp4" />}
+          {isVideoLoaded && (
+            <source src="/intro-compressed.mp4" type="video/mp4" />
+          )}
         </video>
         {/* Play Icon Overlay */}
         <a

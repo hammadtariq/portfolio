@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import { ExternalLink, Github } from 'lucide-react'
+import LazyLoadImg from './LazyLoadImg'
 
 interface Project {
   title: string
@@ -41,7 +42,7 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <div key={project.title} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img src={project.image} alt={project.title} width={300} height={200} className="w-full h-48 object-cover" />
+              <LazyLoadImg src={project.image} alt={project.title} classNames="w-full h-48 object-cover" />
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4 truncate-multi-line">{project.description}</p>
