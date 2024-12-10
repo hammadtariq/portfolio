@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef } from "react";
 import LazyLoadImg from "./LazyLoadImg";
 
 const toolsAndTechnologies = [
@@ -78,10 +78,6 @@ const toolsAndTechnologies = [
   },
 ];
 
-interface Skill {
-  name: string;
-  level: number;
-}
 
 interface ToolProps {
   tech: string;
@@ -573,34 +569,8 @@ const techConfig: Record<string, { icon: JSX.Element; hoverClass: string }> = {
   },
 };
 
-const skills: Skill[] = [
-  { name: "JavaScript", level: 95 },
-  { name: "React", level: 90 },
-  { name: "Angular", level: 85 },
-  { name: "Node.js", level: 88 },
-  { name: "AWS", level: 80 },
-  { name: "TypeScript", level: 85 },
-];
 
 const Skills = forwardRef<HTMLElement>((_props, ref) => {
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setAnimate(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref && "current" in ref && ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [ref]);
 
   return (
     <section ref={ref} className="py-20 bg-gray-100">
