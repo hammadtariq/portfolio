@@ -35,17 +35,18 @@ function Media() {
       (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
-          setIsVideoLoaded(true);
-          observer.disconnect();
+          setIsVideoLoaded(true); // Lazy-load video when it enters the viewport
+          observer.disconnect(); // Disconnect the observer once the video is loaded
         }
       },
       { threshold: 0.5 }
-    );
+    ); // Trigger when 50% of the video is in view
 
     if (videoRef.current) {
       observer.observe(videoRef.current);
     }
 
+    // Cleanup observer on component unmount
     return () => {
       if (videoRef.current) {
         observer.disconnect();
