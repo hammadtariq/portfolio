@@ -1,56 +1,50 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import LazyLoadImg, { ImageLoading } from "./LazyLoadImg";
+import { ImageLoading } from "../constants/image";
+import LazyLoadImg from "./LazyLoadImg";
 
 function Media() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // Play the video when hovered
-  const handleMouseEnter = useCallback(() => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
+  // Play video on hover
+  const playVideo = useCallback(() => {
+    videoRef.current?.play();
   }, []);
 
-  // Pause the video when mouse leaves
-  const handleMouseLeave = useCallback(() => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
+  // Pause video on hover leave
+  const pauseVideo = useCallback(() => {
+    videoRef.current?.pause();
   }, []);
 
-  // Handle video click to open popup
-  const handleVideoClick = useCallback(() => {
+  // Open video popup on click
+  const openPopup = useCallback(() => {
     setIsPopupOpen(true);
   }, []);
 
-  // Close popup
-  const handleClosePopup = useCallback(() => {
+  // Close popup on overlay click
+  const closePopup = useCallback(() => {
     setIsPopupOpen(false);
   }, []);
 
+  // Handle lazy-loading of the video
   useEffect(() => {
+    const videoElement = videoRef.current; // Capture the ref value
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
+      ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVideoLoaded(true); // Lazy-load video when it enters the viewport
-          observer.disconnect(); // Disconnect the observer once the video is loaded
+          setIsVideoLoaded(true); // Lazy-load video when in view
+          observer.disconnect(); // Cleanup observer after loading
         }
       },
-      { threshold: 0.5 }
-    ); // Trigger when 50% of the video is in view
+      { threshold: 0.5 } // Trigger when 50% of the video is visible
+    );
 
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
+    if (videoElement) observer.observe(videoElement);
 
-    // Cleanup observer on component unmount
     return () => {
-      if (videoRef.current) {
-        observer.disconnect();
-      }
+      if (videoElement) observer.disconnect(); // Ensure cleanup uses the same ref
     };
   }, []);
 
@@ -58,8 +52,8 @@ function Media() {
     <div className="flex justify-center mb-8">
       <div
         className="relative w-40 h-40 md:w-48 md:h-48 group"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={playVideo}
+        onMouseLeave={pauseVideo}
       >
         <LazyLoadImg
           src="/profile-dp.webp"
@@ -74,8 +68,8 @@ function Media() {
           muted
           loop
           className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={playVideo}
+          onMouseLeave={pauseVideo}
           aria-label="Intro video"
           title="Click to view full video"
         >
@@ -85,7 +79,7 @@ function Media() {
         </video>
         {/* Play Icon Overlay */}
         <button
-          onClick={handleVideoClick}
+          onClick={openPopup}
           className="absolute inset-0 flex items-center justify-center rounded-full opacity-100 transition-opacity group-hover:opacity-0"
         >
           <svg
@@ -102,7 +96,7 @@ function Media() {
       {isPopupOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-          onClick={handleClosePopup}
+          onClick={closePopup}
         >
           <div
             className="bg-white rounded-lg overflow-hidden w-11/12 md:w-2/3 lg:w-1/2 relative"

@@ -1,9 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-
-export enum ImageLoading {
-  Lazy = "lazy",
-  Eager = "eager",
-}
+import { ImageLoading } from "../constants/image";
 
 interface TechStackProps {
   src: string;
@@ -18,10 +14,13 @@ function LazyLoadImg({
   classNames,
   load = ImageLoading.Lazy,
 }: TechStackProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // For visibility based on IntersectionObserver
+  const [isLoading, setIsLoading] = useState(true); // Track image loading state
   const imgRef = useRef<HTMLImageElement>(null);
 
+  // Intersection Observer to detect if the image is in view
   useEffect(() => {
+    const currentRef = imgRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,25 +30,38 @@ function LazyLoadImg({
       { threshold: 0.1 }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (imgRef.current) {
-        observer.unobserve(imgRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
 
   return (
-    <img
-      ref={imgRef}
-      src={isVisible ? src : ""}
-      alt={alt}
-      className={classNames}
-      loading={load}
-    />
+    <div className={classNames}>
+      {/* Show skeleton if image is still loading */}
+      {isLoading && (
+        <div className="flex items-center justify-center">
+          <div className={`${classNames} rounded bg-gray-200 animate-pulse`} />
+        </div>
+      )}
+      <img
+        ref={imgRef}
+        src={isVisible ? src : ""}
+        alt={alt}
+        className={classNames}
+        loading={load}
+        onLoad={() => setIsLoading(false)} // Trigger on image load
+        style={{
+          visibility: isLoading ? "hidden" : "visible", // Keep image hidden until it loads
+          opacity: isLoading ? 0 : 1, // Fade-in effect after loading
+        }}
+      />
+    </div>
   );
 }
 
