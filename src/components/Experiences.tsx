@@ -47,6 +47,19 @@ interface ExperienceDescriptionProps {
   isLast: boolean;
 }
 
+const getTitleTextClass = (type: string): string => {
+  switch (type) {
+    case "Principal Software Engineer":
+      return "text-gray-500/100";
+    case "Senior Software Engineer":
+      return "text-gray-400/100";
+    case "Software Engineer":
+      return "text-gray-400/100";
+    default:
+      return "text-gray-900";
+  }
+};
+
 const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
   (props: ExperiencesProps, ref: React.ForwardedRef<HTMLElement>) => {
     const { experiences } = props;
@@ -105,7 +118,11 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
 
       {/* Title and Company Info */}
       <div className="mb-4">
-        <h2 className="text-base font-bold text-gray-900 flex items-center experience-title">
+        <h2
+          className={`text-base font-bold flex items-center experience-title ${getTitleTextClass(
+            experience.title
+          )}`}
+        >
           {experience.title} - {experience.companyName} |{" "}
           {experience.companyLocation}
         </h2>
@@ -121,7 +138,11 @@ const ExperienceDescription: React.FC<ExperienceDescriptionProps> = ({
   experience,
   isLast,
 }) => (
-  <div className={`experience-desc md:mt-5 md:pb-5 ${!isLast ? "mb-6" : ""}`}>
+  <div
+    className={`${!isLast ? "mb-6" : ""} ${
+      experience.workSummary ? "experience-desc md:mt-5 md:pb-5" : "md:my-6"
+    }`}
+  >
     <p>{experience.workSummary}</p>
     {experience?.responsibilities &&
       experience?.responsibilities?.length > 0 && (

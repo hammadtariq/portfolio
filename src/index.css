@@ -59,7 +59,7 @@ body {
   width: 2px;
   height: 100%;
   display: block;
-  background-color: #eed9ce;
+  background-color: #bee8f9;
   position: absolute;
   left: -23px;
 }
@@ -72,7 +72,7 @@ body {
     width: 8px;
     height: 8px;
     display: block;
-    background-color: #ff5f00;
+    background-color: #008cff;
     border-radius: 50%;
     position: absolute;
     top: 50%;
