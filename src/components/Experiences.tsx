@@ -53,9 +53,6 @@ const titleClassMap: Record<string, Record<string, string>> = {
     "Senior Software Engineer": "text-gray-400/100",
     "Software Engineer": "text-gray-400/100",
   },
-  "Active Capital IT": {
-    "Software Engineer": "text-gray-400/100",
-  },
 };
 
 const getTitleTextClass = (title: string, companyName: string): string => {
