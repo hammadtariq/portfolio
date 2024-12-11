@@ -47,17 +47,19 @@ interface ExperienceDescriptionProps {
   isLast: boolean;
 }
 
-const getTitleTextClass = (type: string): string => {
-  switch (type) {
-    case "Principal Software Engineer":
-      return "text-gray-500/100";
-    case "Senior Software Engineer":
-      return "text-gray-400/100";
-    case "Software Engineer":
-      return "text-gray-400/100";
-    default:
-      return "text-gray-900";
-  }
+const titleClassMap: Record<string, Record<string, string>> = {
+  Nisum: {
+    "Principal Software Engineer": "text-gray-500/100",
+    "Senior Software Engineer": "text-gray-400/100",
+    "Software Engineer": "text-gray-400/100",
+  },
+  "Active Capital IT": {
+    "Software Engineer": "text-gray-400/100",
+  },
+};
+
+const getTitleTextClass = (title: string, companyName: string): string => {
+  return titleClassMap[companyName]?.[title] || "text-gray-900";
 };
 
 const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
@@ -120,7 +122,8 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
       <div className="mb-4">
         <h2
           className={`text-base font-bold flex items-center experience-title ${getTitleTextClass(
-            experience.title
+            experience.title,
+            experience.companyName
           )}`}
         >
           {experience.title} - {experience.companyName} |{" "}
