@@ -20,9 +20,9 @@ interface Experience {
   endDate?: string;
   title: string;
   companyName: string;
-  companyDomain: string;
-  workSummary: string;
-  responsibilities: string[];
+  companyLocation: string;
+  workSummary?: string;
+  responsibilities?: string[];
   toolsAndTechnologies?: ToolsAndTech[];
   positions?: Position[];
   projects?: Project[];
@@ -47,6 +47,17 @@ interface ExperienceDescriptionProps {
   isLast: boolean;
 }
 
+const titleClassMap: Record<string, Record<string, string>> = {
+  Nisum: {
+    "Principal Software Engineer": "text-gray-500/100",
+    "Senior Software Engineer": "text-gray-400/100",
+    "Software Engineer": "text-gray-400/100",
+  },
+};
+
+const getTitleTextClass = (title: string, companyName: string): string => {
+  return titleClassMap[companyName]?.[title] || "text-gray-900";
+};
 
 const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
   (props: ExperiencesProps, ref: React.ForwardedRef<HTMLElement>) => {
@@ -57,11 +68,13 @@ const Experiences = forwardRef<HTMLElement, ExperiencesProps>(
 
     return (
       <section ref={ref} id="experience" className="py-20 bg-white" data-toggle>
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Experiences</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          Experiences
+        </h2>
         <div className="container mx-auto px-4">
           {/* Section Title */}
-          <div className="flex justify-between">
-          </div>
+          {/* <div className="flex justify-between">
+          </div> */}
 
           <div className="content custom-height">
             <div className="w-100 h-px bg-Gray my-8"></div>
@@ -104,9 +117,14 @@ const ExperienceEntry: React.FC<ExperienceEntryProps> = ({
 
       {/* Title and Company Info */}
       <div className="mb-4">
-        <h2 className="text-base font-bold text-gray-900 flex items-center underline">
+        <h2
+          className={`text-base font-bold flex items-center experience-title ${getTitleTextClass(
+            experience.title,
+            experience.companyName
+          )}`}
+        >
           {experience.title} - {experience.companyName} |{" "}
-          {experience.companyDomain}:
+          {experience.companyLocation}
         </h2>
       </div>
 
@@ -120,22 +138,26 @@ const ExperienceDescription: React.FC<ExperienceDescriptionProps> = ({
   experience,
   isLast,
 }) => (
-  <div className={`experience-desc mt-6 pb-6 ${!isLast ? "mb-6" : ""}`}>
+  <div
+    className={`${!isLast ? "mb-6" : ""} ${
+      experience.workSummary ? "experience-desc md:mt-5 md:pb-5" : "md:my-6"
+    }`}
+  >
     <p>{experience.workSummary}</p>
-    {experience.responsibilities.length > 0 && (
-      <>
-        <h3 className="text-base font-bold mt-6 underline">Responsibilities:</h3>
-        <ul className="mt-2 list-disc list-indent pl-2 ml-4">
-          {experience.responsibilities.map((item, idx) => (
-            <li key={idx} className="my-2">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </>
-    )}
+    {experience?.responsibilities &&
+      experience?.responsibilities?.length > 0 && (
+        <>
+          <h3 className="text-base font-bold mt-6">Responsibilities:</h3>
+          <ul className="mt-2 list-disc list-indent pl-2 ml-4">
+            {experience?.responsibilities?.map((item, idx) => (
+              <li key={idx} className="my-2">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
   </div>
 );
-
 
 export default Experiences;
