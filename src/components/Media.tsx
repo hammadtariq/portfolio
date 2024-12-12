@@ -51,14 +51,14 @@ function Media() {
   return (
     <div className="flex justify-center mb-8">
       <div
-        className="relative w-40 h-40 md:w-48 md:h-48 group"
+        className="relative w-40 h-40 md:w-48 md:h-48 group border-4 border-blue-600 rounded-full"
         onMouseEnter={playVideo}
         onMouseLeave={pauseVideo}
       >
         <LazyLoadImg
           src="/profile-dp.webp"
           alt="Profile"
-          classNames="w-full h-full rounded-full object-cover border-4 border-blue-600 group-hover:opacity-0 transition-opacity"
+          classNames="w-full h-full rounded-full object-cover group-hover:opacity-0 transition-opacity"
           load={ImageLoading.Eager}
         />
         {/* Render the video element only after it's in view */}
@@ -67,7 +67,7 @@ function Media() {
           preload="metadata"
           muted
           loop
-          className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity rounded-full"
           onMouseEnter={playVideo}
           onMouseLeave={pauseVideo}
           aria-label="Intro video"
