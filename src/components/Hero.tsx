@@ -10,7 +10,7 @@ export default function Hero({
     <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-20 md:py-32">
       <div className="container mx-auto px-4 flex flex-col items-center text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          Full-Stack Developer
+          Full Stack Developer
         </h1>
         <p className="text-xl md:text-2xl mb-8">
           Crafting exceptional web and mobile experiences for over a decade

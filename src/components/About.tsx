@@ -18,27 +18,66 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
             <Code size={48} className="mx-auto mb-4 text-blue-600" />
             <h3 className="text-xl font-semibold mb-2">Web Development</h3>
             <p>
-              Expertise in React, Angular, and modern JavaScript frameworks.
+              Expertise in <strong>React</strong>, <strong>Angular</strong>,{" "}
+              <strong>NextJS</strong> and modern JavaScript frameworks.
             </p>
           </div>
           <div className="text-center">
             <Smartphone size={48} className="mx-auto mb-4 text-blue-600" />
             <h3 className="text-xl font-semibold mb-2">Mobile Development</h3>
-            <p>Creating responsive and native mobile applications.</p>
+            <p>
+              Creating Hybrid and Native mobile applications using{" "}
+              <strong>React Native</strong> and <strong>Ionic</strong>.
+            </p>
           </div>
           <div className="text-center">
             <Server size={48} className="mx-auto mb-4 text-blue-600" />
             <h3 className="text-xl font-semibold mb-2">Backend & Cloud</h3>
-            <p>Proficient in Node.js and AWS cloud services.</p>
+            <p>
+              Proficient in <strong>NodeJS</strong> and{" "}
+              <strong>AWS Cloud Services</strong>.
+            </p>
           </div>
         </div>
 
-        <p className="mt-12 text-lg text-center max-w-3xl mx-auto">
-          With over a decade of experience in the ever-evolving world of web and
-          mobile development, I've honed my skills to deliver cutting-edge
-          solutions that drive business growth and user engagement. My passion
-          lies in creating seamless, efficient, and scalable applications that
-          make a real impact.
+        <p className="mt-12 text-lg text-center max-w-5xl mx-auto">
+          Struggling to find a <strong>full stack developer</strong> who truly
+          understands your vision? with over <strong>10 years</strong> of
+          expertise in the
+          <strong> Javascript </strong>ecosystem? I’ve delivered scalable web
+          applications and enterprise solutions for <strong>Fortune 500</strong>{" "}
+          companies like <strong>Macy’s</strong>, <strong>Gap</strong>,{" "}
+          <strong>Williams-Sonoma</strong>, and <strong>Prologis</strong>,
+          building scalable, high-performance systems designed to meet diverse
+          business needs. Let’s bring your ideas to life with solutions tailored
+          to your unique goals.
+          <br />
+          <br />
+          My focus on seamless communication, attention to detail, and
+          results-driven development guarantees a stress-free experience from
+          start to finish.
+          <br />
+          <br />
+          Explore my portfolio for a glimpse into my work. Ready to discuss your
+          project?{" "}
+          <a
+            href="https://wa.me/923312627056"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            Reach out on WhatsApp
+          </a>{" "}
+          for a custom order or schedule a{" "}
+          <a
+            href="https://calendly.com/hammadtariq65"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            free video consultation
+          </a>{" "}
+          today!
         </p>
       </div>
     </section>
