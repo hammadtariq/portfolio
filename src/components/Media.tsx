@@ -38,7 +38,7 @@ function Media() {
           observer.disconnect(); // Cleanup observer after loading
         }
       },
-      { threshold: 0.5 } // Trigger when 50% of the video is visible
+      { threshold: 0.2 } // Trigger when 50% of the video is visible
     );
 
     if (videoElement) observer.observe(videoElement);
