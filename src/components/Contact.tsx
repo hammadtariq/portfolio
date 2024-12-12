@@ -1,101 +1,90 @@
-import { useState } from 'react';
-import { forwardRef } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
-import { sendEmail } from '../utils/email';
+import { forwardRef } from 'react'
+import { Mail, Phone, MapPin, Facebook, Github, Twitter } from 'lucide-react'
 
-const Contact = forwardRef<HTMLElement>((_props, ref) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+interface ContactInfo {
+  icon: React.ReactNode
+  label: string
+  value: string
+  href?: string
+}
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [id]: value }));
-  };
+const Contact = forwardRef<HTMLElement>((_, ref) => {
+  const contactInfo: ContactInfo[] = [
+    { icon: <Mail className="h-5 w-5" />, label: 'Email', value: 'hammadtariq65@gmail.com', href: 'mailto:hammadtariq65@gmail.com' },
+    { icon: <Phone className="h-5 w-5" />, label: 'Phone', value: '+92 (331) 262-7056', href: 'tel:+923312627056' },
+    { icon: <MapPin className="h-5 w-5" />, label: 'Address', value: 'Karachi, Pakistan' },
+  ]
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await sendEmail(formData);
-      alert('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' }); // Reset the form
-    } catch (error) {
-      console.error('Failed to send message:', error);
-      alert('Failed to send the message. Please try again.');
-    }
-  };
+  const socialLinks = [
+    { icon: <Facebook className="h-5 w-5" />, href: 'https://facebook.com/hammadtariq65' },
+    { icon: <Github className="h-5 w-5" />, href: 'https://github.com/hammadtariq' },
+    { icon: <Twitter className="h-5 w-5" />, href: 'https://twitter.com/hammadtariq65' },
+  ]
 
   return (
-    <section ref={ref} className="py-20 bg-white">
+    <section ref={ref} className="py-24 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get in Touch</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <Mail className="text-blue-600 mr-4" size={24} />
-                <span>hammadtariq65@gmail.com</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="text-blue-600 mr-4" size={24} />
-                <span>+92 (331) 262-7056</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="text-blue-600 mr-4" size={24} />
-                <span>Karachi, Pakistan</span>
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Get in Touch</h2>
+        <div className="max-w-4xl mx-auto">
+          <div className="backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-xl overflow-hidden">
+            <div className="p-8">
+              <div className="grid md:grid-cols-2 gap-12">
+                <div>
+                  <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Contact Information</h3>
+                  <div className="space-y-4">
+                    {contactInfo.map((item, index) => (
+                      <div key={index} className="flex items-center space-x-4">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{item.label}</p>
+                          {item.href ? (
+                            <a href={item.href} className="text-lg text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-300">
+                              {item.value}
+                            </a>
+                          ) : (
+                            <p className="text-lg text-gray-800 dark:text-white">{item.value}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">Let's Connect</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    I'm always open to new opportunities and collaborations. Feel free to reach out if you'd like to discuss a project or just say hello!
+                  </p>
+                  <div className="flex space-x-4 mb-8">
+                    {socialLinks.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white transition-colors duration-300"
+                      >
+                        {link.icon}
+                      </a>
+                    ))}
+                  </div>
+                  {/* <button 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                    onClick={() => {}}
+                  >
+                    Download Resume
+                  </button> */}
+                </div>
               </div>
             </div>
           </div>
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name" className="block mb-2 font-medium">Name</label>
-              <input
-                type="text"
-                id="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block mb-2 font-medium">Email</label>
-              <input
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block mb-2 font-medium">Message</label>
-              <textarea
-                id="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={4}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
-            >
-              Send Message
-            </button>
-          </form>
         </div>
       </div>
     </section>
-  );
-});
+  )
+})
 
-Contact.displayName = 'Contact';
-export default Contact;
+Contact.displayName = 'Contact'
+export default Contact
 

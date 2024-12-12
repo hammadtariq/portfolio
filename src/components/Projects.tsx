@@ -72,7 +72,7 @@ const projects: Project[] = [
     image: "/1.webp",
     liveLink: "https://www.catswithglasses.com/",
     // githubLink: 'https://github.com',
-    techs: ["React", "NodeJS", "Tailwind CSS"],
+    techs: ["React", "NodeJS", "Express JS", "Ant Design", "Socket.io"],
   },
   {
     title: "Deliveroo - Food Delivery Manager",
@@ -225,7 +225,7 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
                 alt={project.title}
                 classNames="w-full h-48 object-cover"
               />
-              <div className="p-6">
+              <div className="p-6 pb-8">
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4 truncate-multi-line">
                   {project.description}
