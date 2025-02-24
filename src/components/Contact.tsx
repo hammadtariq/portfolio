@@ -22,7 +22,7 @@ const Contact = forwardRef<HTMLElement>((_, ref) => {
   ]
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <section ref={ref} id='contact' className="py-24 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Get in Touch</h2>
         <div className="max-w-4xl mx-auto">

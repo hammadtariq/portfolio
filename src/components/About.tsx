@@ -1,9 +1,23 @@
 import React, { forwardRef, Suspense } from "react";
+import { Helmet } from "react-helmet";
 import { Code, Smartphone, Server } from "lucide-react";
 const Media = React.lazy(() => import("./Media"));
 const About = forwardRef<HTMLElement>((_props, ref) => {
   return (
-    <section ref={ref} className="py-20 bg-white">
+    <section ref={ref} id="about" className="py-20 bg-white">
+      <Helmet>
+        <title>About Me | Hammad Tariq - Full Stack Developer</title>
+        <meta name="description" content="Learn about Hammad Tariq, a Full Stack Developer with over 10 years of experience in the web and mobile development industry." />
+        <meta property="og:title" content="About Me | Hammad Tariq - Full Stack Developer" />
+        <meta property="og:description" content="Learn about Hammad Tariq, a Full Stack Developer with over 10 years of experience in the web and mobile development industry." />
+        <meta property="og:image" content="/profile-dp.webp" />
+        <meta property="og:url" content="https://tariqhammad.com#about" />
+        <meta property="og:type" content="profile" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Me | Hammad Tariq - Full Stack Developer" />
+        <meta name="twitter:description" content="Learn about Hammad Tariq, a Full Stack Developer with over 10 years of experience in the web and mobile development industry." />
+        <meta name="twitter:image" content="/profile-dp.webp" />
+      </Helmet>
       <div className="container mx-auto px-4">
         {/* Profile Section */}
         <Suspense fallback={<div className="text-center">Loading...</div>}>

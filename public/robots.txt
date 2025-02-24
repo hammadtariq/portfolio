@@ -1,0 +1,41 @@
+# Default rule: Allow all major search engines but restrict bandwidth-heavy bots
+
+User-agent: *
+Disallow: /private/   # Block private directories
+Disallow: /logs/      # Block logs or sensitive data
+Disallow: /tmp/       # Block temporary files
+Disallow: /admin/     # Block admin panels if any exist
+Disallow: /*?*        # Block query string variations, only if not needed for SEO
+Disallow: /*.php$     # Block direct PHP file crawling (if applicable)
+
+# Allow major search engines (Googlebot, Bingbot, etc.)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yahoo! Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block bots that increase hosting costs
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Define sitemap for proper indexing
+Sitemap: https://tariqhammad.com/sitemap.xml

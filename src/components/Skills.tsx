@@ -1,4 +1,6 @@
 import { forwardRef } from "react";
+import { Helmet } from "react-helmet";
+
 import TechStack from "./TechStack";
 import { TechnologyCategory } from "../types/projectTypes";
 
@@ -81,10 +83,34 @@ const toolsAndTechnologies: TechnologyCategory[] = [
 
 const Skills = forwardRef<HTMLElement>((_props, ref) => {
   return (
-    <section ref={ref} className="py-20 bg-gray-100">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-        Skills
-      </h2>
+    <section ref={ref} id="skills" className="py-20 bg-gray-100">
+      <Helmet>
+        <title>Skills & Technologies | Hammad Tariq - Full Stack Developer</title>
+        <meta
+          name="description"
+          content="Explore the expertise of Hammad Tariq, a Full Stack Developer skilled in modern technologies including React, Node.js, AWS, Blockchain, and more."
+        />
+        {/* Open Graph meta tags */}
+        <meta property="og:title" content="Skills & Technologies | Hammad Tariq - Full Stack Developer" />
+        <meta
+          property="og:description"
+          content="Explore the expertise of Hammad Tariq, a Full Stack Developer skilled in modern technologies including React, Node.js, AWS, Blockchain, and more."
+        />
+        <meta property="og:image" content="/profile-dp.webp" />
+        <meta property="og:url" content="https://tariqhammad.com/skills" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Skills & Technologies | Hammad Tariq - Full Stack Developer" />
+        <meta
+          name="twitter:description"
+          content="Explore the expertise of Hammad Tariq, a Full Stack Developer skilled in modern technologies including React, Node.js, AWS, Blockchain, and more."
+        />
+        <meta name="twitter:image" content="/profile-dp.webp" />
+      </Helmet>
+
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Skills</h2>
       <div className="container mx-auto px-5 bg-white rounded-lg shadow-md overflow-hidden">
         {toolsAndTechnologies?.length > 0 && (
           <>

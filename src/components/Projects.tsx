@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import { Helmet } from "react-helmet";
 import { ExternalLink, Github, XCircle } from "lucide-react";
 import LazyLoadImg from "./LazyLoadImg";
 import TechStack from "./TechStack";
@@ -209,7 +210,20 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
   };
 
   return (
-    <section ref={ref} className="py-20 bg-gray-100">
+    <section ref={ref} id="projects" className="py-20 bg-gray-100">
+      <Helmet>
+        <title>Projects | Hammad Tariq - Full Stack Developer</title>
+        <meta name="description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
+        <meta property="og:title" content="Projects | Hammad Tariq - Full Stack Developer" />
+        <meta property="og:description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
+        <meta property="og:image" content="/profile-dp.webp" />
+        <meta property="og:url" content="https://tariqhammad.com#projects" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Projects | Hammad Tariq - Full Stack Developer" />
+        <meta name="twitter:description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
+        <meta name="twitter:image" content="/profile-dp.webp" />
+      </Helmet>
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Featured Projects
