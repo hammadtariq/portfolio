@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { Mail, Phone, MapPin, Facebook, Github, Twitter } from 'lucide-react'
+import { Mail, Phone, MapPin, Facebook, Github, Twitter, Linkedin } from 'lucide-react'
 
 interface ContactInfo {
   icon: React.ReactNode
@@ -16,6 +16,7 @@ const Contact = forwardRef<HTMLElement>((_, ref) => {
   ]
 
   const socialLinks = [
+    { icon: <Linkedin className="h-5 w-5" />, href: 'https://www.linkedin.com/in/hammadtariq1' },
     { icon: <Facebook className="h-5 w-5" />, href: 'https://facebook.com/hammadtariq65' },
     { icon: <Github className="h-5 w-5" />, href: 'https://github.com/hammadtariq' },
     { icon: <Twitter className="h-5 w-5" />, href: 'https://twitter.com/hammadtariq65' },

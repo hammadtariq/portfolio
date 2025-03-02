@@ -33,6 +33,7 @@ export default function Portfolio() {
     "jobTitle": "Full Stack Developer",
     "url": "https://tariqhammad.com",
     "sameAs": [
+      "https://www.linkedin.com/in/hammadtariq1",
       "https://facebook.com/hammadtariq65",
       "https://twitter.com/hammadtariq", // Updated to correct URL format
       "https://github.com/hammadtariq"
