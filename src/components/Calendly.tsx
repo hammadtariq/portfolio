@@ -2,16 +2,24 @@ import { Phone } from "lucide-react";
 import { useState } from "react";
 import { PopupModal } from "react-calendly";
 
-export default function ScheduleCall() {
+type ScheduleCallProps = {
+  label?: string;
+  className?: string;
+};
+
+export default function ScheduleCall({
+  label = "Schedule A Call",
+  className = "",
+}: ScheduleCallProps) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div>
       <button
-        className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold flex items-center hover:bg-blue-100 transition duration-300"
+        className={`bg-white text-blue-600 px-6 py-3 rounded-full font-semibold flex items-center hover:bg-blue-100 transition duration-300 ${className}`}
         onClick={() => setShowModal(true)}
       >
-        Schedule A Call
+        {label}
         <Phone className="ml-2" size={16} />
       </button>
       {showModal && (
