@@ -16,11 +16,11 @@ export default function ScheduleCall({
   return (
     <div>
       <button
-        className={`bg-white text-blue-600 px-6 py-3 rounded-full font-semibold flex items-center hover:bg-blue-100 transition duration-300 ${className}`}
+        className={`inline-flex items-center justify-center gap-2 rounded-full border-2 border-gray-900 px-6 py-3 font-semibold text-gray-900 transition-colors duration-300 hover:bg-gray-900 hover:text-white ${className}`}
         onClick={() => setShowModal(true)}
       >
         {label}
-        <Phone className="ml-2" size={16} />
+        <Phone size={18} />
       </button>
       {showModal && (
         <PopupModal
