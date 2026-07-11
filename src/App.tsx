@@ -8,7 +8,6 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Experiences from './components/Experiences'
 import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import WhatsApp from "./components/WhatsApp";
 
@@ -20,7 +19,6 @@ export default function Portfolio() {
   const experiencesRef = useRef<HTMLElement>(null)
   const projectsRef = useRef<HTMLElement>(null)
   const testimonialsRef = useRef<HTMLElement>(null)
-  const contactRef = useRef<HTMLElement>(null)
 
   const scrollTo = (ref: React.RefObject<HTMLElement>) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
@@ -80,7 +78,11 @@ export default function Portfolio() {
         onExperiencesClick={() => scrollTo(experiencesRef)}
         onTestimonialsClick={() => scrollTo(testimonialsRef)}
         onProjectsClick={() => scrollTo(projectsRef)}
-        onContactClick={() => scrollTo(contactRef)}
+        onContactClick={() =>
+          document
+            .getElementById("contact")
+            ?.scrollIntoView({ behavior: "smooth" })
+        }
       />
       <Hero onProjectsClick={() => scrollTo(projectsRef)} />
       <About ref={aboutRef} />
@@ -88,7 +90,6 @@ export default function Portfolio() {
       <Experiences ref={experiencesRef} experiences={experiencesData} />
       <Projects ref={projectsRef} />
       <Testimonials ref={testimonialsRef} />
-      <Contact ref={contactRef} />
       <Footer />
       <WhatsApp />
     </div>
