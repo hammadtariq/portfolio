@@ -42,12 +42,10 @@ function LazyLoadImg({
   }, []);
 
   return (
-    <div className={classNames}>
+    <div className={`relative ${classNames}`}>
       {/* Show skeleton if image is still loading */}
       {isLoading && (
-        <div className="flex items-center justify-center">
-          <div className={`${classNames} rounded bg-gray-200 animate-pulse`} />
-        </div>
+        <div className="absolute inset-0 rounded bg-gray-200 animate-pulse" />
       )}
       <img
         ref={imgRef}

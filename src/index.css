@@ -53,43 +53,6 @@ body {
   }
 }
 
-#experience .experience-desc {
-  position: relative; /* Ensures the ::before element positions relative to .experience-desc */
-}
-
-#experience .experience-title {
-  position: relative; /* Ensures the ::before element positions relative to .experience-desc */
-}
-
-#experience .experience-desc::before,
-#volunteering .volunteer-desc::before,
-#education .education-desc::before {
-  content: "";
-  width: 2px;
-  height: 100%;
-  display: block;
-  background-color: #bee8f9;
-  position: absolute;
-  left: -23px;
-}
-
-@media (min-width: 1023px) {
-  #experience .experience-title::before,
-  #volunteering .volunteer-title::before,
-  #education .education-title::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    display: block;
-    background-color: #008cff;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -26px;
-  }
-}
-
 .whatsapp-container {
   position: fixed;
   bottom: 80px;

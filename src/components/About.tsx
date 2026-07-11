@@ -1,8 +1,7 @@
-import React, { forwardRef, Suspense } from "react";
+import { forwardRef } from "react";
 import { Helmet } from "react-helmet";
 import { Code, Smartphone, Server } from "lucide-react";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
-const Media = React.lazy(() => import("./Media"));
 
 const capabilities = [
   {
@@ -50,16 +49,6 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
           }`}
         >
           <div className="lg:sticky lg:top-28">
-            <div className="mb-8 flex justify-center lg:justify-start">
-              <Suspense
-                fallback={
-                  <div className="h-40 w-40 animate-pulse rounded-full bg-gray-100 md:h-48 md:w-48" />
-                }
-              >
-                <Media />
-              </Suspense>
-            </div>
-
             <div className="rounded-3xl border border-gray-200 divide-y divide-gray-100">
               {capabilities.map(({ icon: Icon, label, description }) => (
                 <div key={label} className="flex items-start gap-4 p-5">

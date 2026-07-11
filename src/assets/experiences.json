@@ -32,7 +32,7 @@
         ]
     },
     {
-        "startDate": "Aug 2021",
+        "startDate": "Feb 2018",
         "endDate": "Dec 2022",
         "title": "Senior Technical Lead",
         "companyName": "Nisum",
@@ -45,35 +45,34 @@
             "Effectively communicated with offshore teams, gathered requirements, and maintained code quality",
             "Demonstrated deep understanding of technical and business aspects, validating specifications and driving successful releases",
             "Recruitment and Mentoring of resources"
+        ],
+        "positions": [
+            {
+                "startDate": "Feb 2018",
+                "endDate": "Mar 2019",
+                "title": "Software Engineer"
+            },
+            {
+                "startDate": "Feb 2019",
+                "endDate": "Mar 2020",
+                "title": "Senior Software Engineer"
+            },
+            {
+                "startDate": "Sep 2020",
+                "endDate": "Mar 2021",
+                "title": "Principal Software Engineer"
+            },
+            {
+                "startDate": "Apr 2021",
+                "endDate": "Aug 2021",
+                "title": "Technical Lead"
+            },
+            {
+                "startDate": "Aug 2021",
+                "endDate": "Dec 2022",
+                "title": "Senior Technical Lead"
+            }
         ]
-    },
-    {
-        "startDate": "Apr 2021",
-        "endDate": "Aug 2021",
-        "title": "Technical Lead",
-        "companyName": "Nisum",
-        "companyLocation": "Karachi, Pakistan (Onsite)"
-    },
-    {
-        "startDate": "Sep 2020",
-        "endDate": "Mar 2021",
-        "title": "Principal Software Engineer",
-        "companyName": "Nisum",
-        "companyLocation": "Karachi, Pakistan (Onsite)"
-    },
-    {
-        "startDate": "Feb 2019",
-        "endDate": "Mar 2020",
-        "title": "Senior Software Engineer",
-        "companyName": "Nisum",
-        "companyLocation": "Karachi, Pakistan (Onsite)"
-    },
-    {
-        "startDate": "Feb 2018",
-        "endDate": "Mar 2019",
-        "title": "Software Engineer",
-        "companyName": "Nisum",
-        "companyLocation": "Karachi, Pakistan (Onsite)"
     },
     {
         "startDate": "Jul 2016",

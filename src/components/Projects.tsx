@@ -1,17 +1,27 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { ExternalLink, Github, XCircle } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronDown,
+  ExternalLink,
+  Github,
+  TrendingUp,
+  X,
+} from "lucide-react";
 import LazyLoadImg from "./LazyLoadImg";
 import TechStack from "./TechStack";
+import { TechConfig } from "./TechConfig";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 interface Project {
   title: string;
   description: string;
-  detailDescription?: string | TrustedHTML;
+  detailDescription?: string;
   image: string;
   liveLink?: string;
   githubLink?: string;
   techs?: string[];
+  impact?: string;
 }
 
 const projects: Project[] = [
@@ -23,7 +33,6 @@ const projects: Project[] = [
       <p>
   A <strong>QR Menu App</strong> designed for luxury hotels in the MENA region, empowering guests to order food and services by scanning QR codes placed in hotel areas. As CTO, I transformed this app into a robust, scalable solution that significantly enhanced guest experiences and boosted revenue from <strong>$10k to $500k per month</strong> within nine months. Key features and improvements include:
 </p>
-<br/>
 <ul>
   <li><strong>QR Code Ordering:</strong> Simplified the ordering process by enabling guests to access menus and place orders through QR code scans.</li>
   <li><strong>POS System Integration:</strong> Integrated with major POS systems to streamline order management and processing.</li>
@@ -40,7 +49,7 @@ const projects: Project[] = [
     image: "/10.webp",
     liveLink:
       "https://qr.ringnbring.com/#/orders?restoID=y5gMnQGOVW1lu4WalNZd&table=1&tablelabel=25&uniqueQRcode=&isDelivery=false&redirectToItem=false&menuId=&categoryId=&subCategoryId=&itemId=",
-    // githubLink: 'https://github.com',
+    impact: "50x revenue growth in 9 months",
     techs: [
       "Angular",
       "NodeJS",
@@ -57,10 +66,7 @@ const projects: Project[] = [
     description:
       "A video customizer app that allows users to enhance their videos with expertly curated music. My client's team of music experts suggests the perfect tracks for your video, which you can review and share with friends. This seamless integration of video and music customization provides a unique and enjoyable user experience, making video creation easy and fun.",
     detailDescription: `<p>The <strong>Video Customizer App</strong> was designed to streamline the video editing process by integrating advanced customization tools with collaborative features, empowering users to create professional-grade videos effortlessly.</p>
-    <br/>
     <p><strong>Key Features:</strong></p>
-    <br/>
-
     <ul>
       <li><strong>Video Cropping:</strong> Precisely trim and adjust video lengths.</li>
       <li><strong>Audio Customization:</strong> Replace audio, synchronize music to specific video timeframes, and enhance video appeal with curated soundtracks.</li>
@@ -68,27 +74,19 @@ const projects: Project[] = [
       <li><strong>Project Dashboard:</strong> Manage all video projects in one place, upload curated music tracks, and organize resources efficiently.</li>
     </ul>
     <p>The app was built to address the challenges of combining professional video editing with intuitive collaboration. By implementing a responsive dashboard and robust features like real-time commenting and customizable music libraries, users gain full control over their creative projects.</p>
-    <br/>
     <p>This app revolutionized video editing and collaboration, empowering teams to deliver polished, professional videos effortlessly, all while improving project organization and creative workflow.</p>`,
     image: "/1.webp",
     liveLink: "https://www.catswithglasses.com/",
-    // githubLink: 'https://github.com',
     techs: ["React", "NodeJS", "Express JS", "Ant Design", "Socket.io"],
   },
   {
     title: "Deliveroo - Food Delivery Manager",
     description:
       "Deliveroo is a platform designed to streamline restaurant and outlet management, similar to Foodpanda but focused on administrators. It enables users to add, update, and manage restaurant listings, menus, and item details, ensuring smooth operations for restaurant administrators.",
-    detailDescription: `
-    Deliveroo is a platform designed to streamline restaurant and outlet management, similar to Foodpanda but focused on administrators. It enables users to add, update, and manage restaurant listings, menus, and item details, ensuring smooth operations for restaurant administrators.
-
-    Challenges & Solutions: One of the main challenges was handling complex restaurant operations efficiently, such as real-time menu updates and managing multiple outlets. This was addressed by implementing a scalable architecture and optimizing database queries for fast data retrieval, ensuring seamless updates and smooth management across multiple locations.
-
-    Tech Stack: React, NodeJS, MongoDB, Docker, Microservices, Ant Design
-    `,
+    detailDescription: `<p>Deliveroo is a platform designed to streamline restaurant and outlet management, similar to Foodpanda but focused on administrators. It enables users to add, update, and manage restaurant listings, menus, and item details, ensuring smooth operations for restaurant administrators.</p>
+    <p><strong>Challenges &amp; Solutions:</strong> One of the main challenges was handling complex restaurant operations efficiently, such as real-time menu updates and managing multiple outlets. This was addressed by implementing a scalable architecture and optimizing database queries for fast data retrieval, ensuring seamless updates and smooth management across multiple locations.</p>`,
     image: "/7.webp",
     liveLink: "https://bogo.pk/",
-    // githubLink: 'https://github.com',
     techs: [
       "React",
       "NodeJS",
@@ -102,86 +100,58 @@ const projects: Project[] = [
     title: "Tap Tap Store - Warehouse Management System",
     description:
       "I created an Inventory Management System using Next.js, Node.js, and PostgreSQL to streamline operations and reduce errors. Key features include real-time tracking, automated workflows, and reporting. The system improved efficiency, reducing manual effort by 50% and eliminating inventory errors.",
-    detailDescription: `This project aimed to create a scalable and efficient solution for managing inventory, purchases, and sales while reducing errors and manual workload. I developed a responsive Inventory Management System using modern technologies like Next.js, Node.js, and PostgreSQL to achieve this.
-
-    Key features of the system include real-time inventory tracking to prevent overstocking and shortages, automated workflows to streamline purchase and sales management, and advanced reporting tools that provide actionable insights into stock movements and sales trends. The frontend was designed with Ant Design for an intuitive and responsive user experience, ensuring seamless usability across devices.
-
-    One of the biggest challenges was automating manual workflows without disrupting the existing processes. I overcame this by working closely with stakeholders to understand their workflows and tailoring the system to their exact needs. The scalable architecture ensured the system could grow with future business requirements.
-
-    As a result, the system reduced manual effort by 50%, eliminated errors in inventory tracking, and significantly improved operational efficiency. It empowered the team to make data-driven decisions and streamline their operations effectively.`,
+    detailDescription: `<p>This project aimed to create a scalable and efficient solution for managing inventory, purchases, and sales while reducing errors and manual workload. I developed a responsive Inventory Management System using modern technologies like Next.js, Node.js, and PostgreSQL to achieve this.</p>
+    <p>Key features of the system include real-time inventory tracking to prevent overstocking and shortages, automated workflows to streamline purchase and sales management, and advanced reporting tools that provide actionable insights into stock movements and sales trends. The frontend was designed with Ant Design for an intuitive and responsive user experience, ensuring seamless usability across devices.</p>
+    <p>One of the biggest challenges was automating manual workflows without disrupting the existing processes. I overcame this by working closely with stakeholders to understand their workflows and tailoring the system to their exact needs. The scalable architecture ensured the system could grow with future business requirements.</p>
+    <p>As a result, the system reduced manual effort by 50%, eliminated errors in inventory tracking, and significantly improved operational efficiency. It empowered the team to make data-driven decisions and streamline their operations effectively.</p>`,
     image: "/11.webp",
     liveLink: "https://bogo.pk/",
-    // githubLink: 'https://github.com',
+    impact: "50% less manual effort",
     techs: ["React", "NodeJS", "NextJS", "HTML", "CSS", "PostgreSQL"],
   },
   {
     title: "NFT Marketplace",
     description:
       "As the Lead Fullstack Developer, I built an NFT Marketplace from the ground up, delivering a seamless Web3 experience. Features include NFT event history with filters, sorting, pagination, and real-time UI updates via blockchain event watchers. Designed a robust system inspired by OpenSea.",
-    detailDescription: `<div> 
-      <p>
-        As the <strong>Lead Fullstack Developer</strong>, I spearheaded the development of a fully functional NFT Marketplace, 
-        tackling the project from ideation to deployment. The platform was built from scratch, designed to deliver a seamless 
+    detailDescription: `<p>
+        As the <strong>Lead Fullstack Developer</strong>, I spearheaded the development of a fully functional NFT Marketplace,
+        tackling the project from ideation to deployment. The platform was built from scratch, designed to deliver a seamless
         user experience for trading and managing NFTs. Below are the key aspects and challenges of the project:
       </p>
-
-      <strong>System Architecture:</strong>
-      <p>
-        I designed the system architecture to ensure seamless communication between services in a decentralized Web3 environment. 
-        This included integrating smart contracts with the backend and frontend to enable features like minting, transferring, and 
-        trading NFTs. Drawing inspiration from industry leaders like OpenSea and Rarible, I ensured that the system was both scalable 
-        and secure.
-      </p>
-      <br />
-      <strong>Key Features:</strong>
-      <br />
+      <p><strong>System Architecture:</strong> I designed the system architecture to ensure seamless communication between services in a decentralized Web3 environment.
+        This included integrating smart contracts with the backend and frontend to enable features like minting, transferring, and
+        trading NFTs. Drawing inspiration from industry leaders like OpenSea and Rarible, I ensured that the system was both scalable
+        and secure.</p>
+      <p><strong>Key Features:</strong></p>
       <ul>
         <li>
-          <strong>Event History for NFTs:</strong>
-          <ul>
-            <li>Built a feature to display the complete event history of NFTs, including minting, sales, and ownership transfers.</li>
-            <li>Added advanced filters, sorting options, and pagination for easy navigation.</li>
-          </ul>
+          <strong>Event History for NFTs:</strong> Built a feature to display the complete event history of NFTs, including minting, sales, and ownership transfers, with advanced filters, sorting options, and pagination for easy navigation.
         </li>
         <li>
-          <strong>Real-Time Blockchain Event Handling:</strong>
-          <ul>
-            <li>Developed a system to watch and index blockchain events using tools like Hardhat and Ethers.js.</li>
-            <li>Ensured real-time UI updates to reflect changes on the blockchain instantly.</li>
-          </ul>
+          <strong>Real-Time Blockchain Event Handling:</strong> Developed a system to watch and index blockchain events using tools like Hardhat and Ethers.js, ensuring real-time UI updates to reflect changes on the blockchain instantly.
         </li>
         <li>
-          <strong>NFT Trading and Management:</strong>
-          <ul>
-            <li>Designed and deployed smart contracts for core marketplace functionalities such as listing, bidding, and transferring NFTs.</li>
-            <li>Integrated wallet support for users to connect, interact, and complete transactions seamlessly.</li>
-          </ul>
+          <strong>NFT Trading and Management:</strong> Designed and deployed smart contracts for core marketplace functionalities such as listing, bidding, and transferring NFTs, with wallet support for users to connect, interact, and complete transactions seamlessly.
         </li>
       </ul>
-      <br />
-      <strong>Challenges Overcome:</strong>
+      <p><strong>Challenges Overcome:</strong></p>
       <ul>
         <li>
-          <strong>Underdeveloped Libraries:</strong> Despite good documentation, we faced stability and process clarity issues 
+          <strong>Underdeveloped Libraries:</strong> Despite good documentation, we faced stability and process clarity issues
           with some Web3 libraries. I resolved these through extensive debugging and by creating custom utilities where needed.
         </li>
         <li>
-          <strong>Team Expertise:</strong> Assembling a team with Web3 expertise was a challenge. I trained resources on blockchain 
+          <strong>Team Expertise:</strong> Assembling a team with Web3 expertise was a challenge. I trained resources on blockchain
           concepts and tools to ensure smooth collaboration.
         </li>
         <li>
-          <strong>Blockchain Event Indexing:</strong> Watching and indexing blockchain events efficiently to trigger UI updates 
+          <strong>Blockchain Event Indexing:</strong> Watching and indexing blockchain events efficiently to trigger UI updates
           required deep technical exploration and optimization.
         </li>
       </ul>
-      <br />
-      <strong>Results:</strong>
-      <p>
-        The NFT Marketplace is a robust platform that allows users to mint, trade, and manage NFTs effortlessly. Its architecture 
-        supports scalability, ensuring it can handle a growing user base while maintaining high performance. The success of this project 
-        showcases my ability to design and deliver innovative Web3 solutions, even under challenging circumstances.
-      </p>
-    </div>`,
+      <p><strong>Results:</strong> The NFT Marketplace is a robust platform that allows users to mint, trade, and manage NFTs effortlessly. Its architecture
+        supports scalability, ensuring it can handle a growing user base while maintaining high performance. The success of this project
+        showcases my ability to design and deliver innovative Web3 solutions, even under challenging circumstances.</p>`,
     image: "/9.webp",
     techs: [
       "React",
@@ -198,19 +168,29 @@ const projects: Project[] = [
   },
 ];
 
+const INITIAL_VISIBLE_COUNT = 6;
+
 const Projects = forwardRef<HTMLElement>((_props, ref) => {
   const [popupData, setPopupData] = useState<Project | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
 
-  const openPopup = (project: Project) => {
-    setPopupData(project);
-  };
+  const [spotlight, ...rest] = projects;
+  const visibleRest = showAll ? rest : rest.slice(0, INITIAL_VISIBLE_COUNT);
+  const remainingCount = rest.length - visibleRest.length;
 
-  const closePopup = () => {
-    setPopupData(null);
-  };
+  useEffect(() => {
+    if (!popupData) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPopupData(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [popupData]);
 
   return (
-    <section ref={ref} id="projects" className="py-20 bg-gray-100">
+    <section ref={ref} id="projects" className="py-24 md:py-32 bg-gray-50">
       <Helmet>
         <title>Projects | Hammad Tariq - Full Stack Developer</title>
         <meta name="description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
@@ -225,104 +205,283 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
         <meta name="twitter:image" content="/profile-dp.webp" />
       </Helmet>
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Featured Projects
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-950">
+          Projects
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div
-              key={project.title}
-              className="bg-white relative rounded-lg shadow-md overflow-hidden"
-            >
-              <LazyLoadImg
-                src={project.image}
-                alt={project.title}
-                classNames="w-full h-48 object-cover"
+        <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-gray-600">
+          A selection of products I&apos;ve designed, built, and shipped for
+          clients across hospitality, logistics, and Web3.
+        </p>
+
+        <div ref={revealRef} className="mt-16">
+          <SpotlightCard
+            project={spotlight}
+            isVisible={isVisible}
+            onShowDetails={() => setPopupData(spotlight)}
+          />
+
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {visibleRest.map((project, index) => (
+              <CompactProjectCard
+                key={project.title}
+                project={project}
+                isVisible={isVisible}
+                delayMs={Math.min(index, 8) * 60}
+                onShowDetails={() => setPopupData(project)}
               />
-              <div className="p-6 pb-8">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4 truncate-multi-line">
-                  {project.description}
-                </p>
-                <div className="flex absolute bottom-3 justify-between">
-                  <button
-                    className="flex items-center text-blue-600 hover:text-blue-800"
-                    onClick={() => openPopup(project)}
-                  >
-                    <ExternalLink size={20} className="mr-2" />
-                    Show Details
-                  </button>
-                  {project.githubLink ? (
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-600 hover:text-gray-800"
-                    >
-                      <Github size={20} className="mr-2" />
-                      GitHub
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      {popupData && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden w-11/12 md:w-2/3 lg:w-1/2 relative p-4 max-h-[80vh] overflow-y-auto">
-            {/* Sticky Close Button */}
-            <div className="sticky -top-1 -right-10 text-right">
+            ))}
+          </div>
+
+          {remainingCount > 0 && (
+            <div className="mt-8 flex justify-center">
               <button
-                className="text-red-500 hover:text-red-700 transition duration-200 z-60"
-                onClick={closePopup}
+                className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:border-gray-400 hover:bg-white"
+                onClick={() => setShowAll(true)}
               >
-                <XCircle size={30} />
+                Show {remainingCount} more projects
+                <ChevronDown size={16} />
               </button>
             </div>
-
-            {/* Project Title */}
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-              {popupData.title}
-            </h2>
-
-            {/* Project Image */}
-            <LazyLoadImg
-              src={popupData.image}
-              alt={popupData.title}
-              classNames="w-full h-60 object-cover rounded-md mb-6 shadow-md"
-            />
-
-            {/* Project Description */}
-            <p
-              className="text-gray-700 mb-6 leading-relaxed"
-              dangerouslySetInnerHTML={{
-                __html: popupData.detailDescription ?? "",
-              }}
-            ></p>
-
-            {/* Tech Stack Section */}
-            <div className="mb-6">
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">
-                Tech Stack
-              </h4>
-              <div className="flex flex-wrap gap-4">
-                {popupData.techs?.map((techStack, stackIdx) => (
-                  <TechStack
-                    key={stackIdx}
-                    tech={techStack}
-                    classNames="w-5 h-5"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          )}
         </div>
+      </div>
+
+      {popupData && (
+        <ProjectModal
+          project={popupData}
+          onClose={() => setPopupData(null)}
+        />
       )}
     </section>
   );
 });
+
+const ImpactLine: React.FC<{ impact: string; className?: string }> = ({
+  impact,
+  className = "",
+}) => (
+  <div
+    className={`inline-flex items-center gap-1.5 font-semibold text-blue-600 ${className}`}
+  >
+    <TrendingUp size={14} className="flex-none" />
+    {impact}
+  </div>
+);
+
+const ProjectFooter: React.FC<{
+  project: Project;
+  onShowDetails: () => void;
+}> = ({ project, onShowDetails }) => (
+  <div className="mt-auto flex items-center justify-between gap-3 pt-6">
+    {project.liveLink && (
+      <a
+        href={project.liveLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-500"
+      >
+        View Live
+        <ExternalLink size={14} />
+      </a>
+    )}
+    <div className="flex items-center gap-4">
+      <button
+        className="inline-flex items-center gap-1 text-sm font-medium text-gray-600 transition-colors duration-200 hover:text-gray-950"
+        onClick={onShowDetails}
+      >
+        Details
+        <ArrowRight size={14} />
+      </button>
+      {project.githubLink && (
+        <a
+          href={project.githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} on GitHub`}
+          className="text-gray-400 transition-colors duration-200 hover:text-gray-950"
+        >
+          <Github size={18} />
+        </a>
+      )}
+    </div>
+  </div>
+);
+
+const SpotlightCard: React.FC<{
+  project: Project;
+  isVisible: boolean;
+  onShowDetails: () => void;
+}> = ({ project, isVisible, onShowDetails }) => {
+  const visibleTechs = project.techs?.slice(0, 6) ?? [];
+  const hiddenTechCount = (project.techs?.length ?? 0) - visibleTechs.length;
+
+  return (
+    <div
+      className={`group flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white transition-all duration-700 ease-out hover:shadow-xl lg:col-span-12 lg:flex-row ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
+    >
+      <div className="overflow-hidden lg:w-[45%]">
+        <LazyLoadImg
+          src={project.image}
+          alt={project.title}
+          classNames="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 lg:h-full"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-6 md:p-8 lg:w-[55%]">
+        {project.impact && <ImpactLine impact={project.impact} />}
+        <h3 className="mt-2 text-2xl font-bold tracking-tight text-gray-950">
+          {project.title}
+        </h3>
+        <p className="mt-3 leading-relaxed text-gray-600 line-clamp-3 lg:line-clamp-4">
+          {project.description}
+        </p>
+
+        {visibleTechs.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {visibleTechs.map((tech) => (
+              <TechStack key={tech} tech={tech} classNames="w-3.5 h-3.5" />
+            ))}
+            {hiddenTechCount > 0 && (
+              <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-500">
+                +{hiddenTechCount} more
+              </span>
+            )}
+          </div>
+        )}
+
+        <ProjectFooter project={project} onShowDetails={onShowDetails} />
+      </div>
+    </div>
+  );
+};
+
+const COMPACT_TECH_ICON_COUNT = 3;
+
+const CompactProjectCard: React.FC<{
+  project: Project;
+  isVisible: boolean;
+  delayMs: number;
+  onShowDetails: () => void;
+}> = ({ project, isVisible, delayMs, onShowDetails }) => {
+  const visibleTechs = project.techs?.slice(0, COMPACT_TECH_ICON_COUNT) ?? [];
+  const hiddenTechCount = (project.techs?.length ?? 0) - visibleTechs.length;
+
+  return (
+    <button
+      className={`group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white text-left transition-all duration-700 ease-out hover:shadow-lg ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      }`}
+      style={{ transitionDelay: isVisible ? `${delayMs}ms` : "0ms" }}
+      onClick={onShowDetails}
+    >
+      <div className="overflow-hidden">
+        <LazyLoadImg
+          src={project.image}
+          alt={project.title}
+          classNames="h-28 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-4">
+        {project.impact && (
+          <ImpactLine impact={project.impact} className="text-[11px]" />
+        )}
+        <h3 className="mt-1 line-clamp-2 text-sm font-bold text-gray-950">
+          {project.title}
+        </h3>
+
+        {visibleTechs.length > 0 && (
+          <div className="mt-2 flex items-center gap-1.5">
+            {visibleTechs.map((tech) => (
+              <span key={tech} className="flex-none" title={tech}>
+                {TechConfig[tech]?.icon("w-4 h-4")}
+              </span>
+            ))}
+            {hiddenTechCount > 0 && (
+              <span className="text-xs font-medium text-gray-400">
+                +{hiddenTechCount}
+              </span>
+            )}
+          </div>
+        )}
+
+        <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-medium text-gray-600 transition-colors duration-200 group-hover:text-gray-950">
+          Details
+          <ArrowRight size={12} />
+        </span>
+      </div>
+    </button>
+  );
+};
+
+const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
+  project,
+  onClose,
+}) => (
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/70 p-4 backdrop-blur-sm"
+    onClick={onClose}
+  >
+    <div
+      className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-gray-100 bg-white shadow-2xl"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <button
+        className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white/90 text-gray-500 backdrop-blur transition-colors duration-200 hover:bg-gray-50 hover:text-gray-950"
+        onClick={onClose}
+        aria-label="Close project details"
+      >
+        <X size={18} />
+      </button>
+
+      <LazyLoadImg
+        src={project.image}
+        alt={project.title}
+        classNames="h-56 w-full rounded-t-3xl object-cover md:h-64"
+      />
+
+      <div className="p-6 md:p-8">
+        {project.impact && (
+          <ImpactLine impact={project.impact} className="text-sm" />
+        )}
+        <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-950">
+          {project.title}
+        </h2>
+        {project.liveLink && (
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-500"
+          >
+            View Live
+            <ExternalLink size={14} />
+          </a>
+        )}
+
+        <div
+          className="mt-4 leading-relaxed text-gray-600 [&_br]:hidden [&_li]:leading-relaxed [&_p:last-child]:mb-0 [&_p]:mb-4 [&_strong]:font-semibold [&_strong]:text-gray-950 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5"
+          dangerouslySetInnerHTML={{
+            __html: project.detailDescription ?? "",
+          }}
+        />
+
+        {project.techs && project.techs.length > 0 && (
+          <div className="mt-2">
+            <h3 className="text-sm font-semibold text-gray-950">
+              Tech Stack
+            </h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {project.techs.map((tech) => (
+                <TechStack key={tech} tech={tech} classNames="w-3.5 h-3.5" />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+);
 
 Projects.displayName = "Projects";
 export default Projects;

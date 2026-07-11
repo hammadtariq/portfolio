@@ -49,9 +49,9 @@ function Media() {
   }, []);
 
   return (
-    <div className="flex justify-center mb-8">
+    <>
       <div
-        className="relative w-40 h-40 md:w-48 md:h-48 group border-4 border-blue-600 rounded-full"
+        className="group relative h-16 w-16 flex-none rounded-full border-4 border-blue-600 sm:h-24 sm:w-24 md:h-32 md:w-32 lg:h-48 lg:w-48"
         onMouseEnter={playVideo}
         onMouseLeave={pauseVideo}
       >
@@ -86,7 +86,7 @@ function Media() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="white"
-            className="w-10 h-10 rounded-full bg-black bg-opacity-50"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black bg-opacity-50"
           >
             <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
           </svg>
@@ -111,7 +111,7 @@ function Media() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 export default Media;
