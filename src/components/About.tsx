@@ -1,10 +1,34 @@
 import React, { forwardRef, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { Code, Smartphone, Server } from "lucide-react";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 const Media = React.lazy(() => import("./Media"));
+
+const capabilities = [
+  {
+    icon: Code,
+    label: "Web Development",
+    description:
+      "Expertise in React, Angular, NextJS and modern JavaScript frameworks.",
+  },
+  {
+    icon: Smartphone,
+    label: "Mobile Development",
+    description:
+      "Creating hybrid and native mobile applications using React Native and Ionic.",
+  },
+  {
+    icon: Server,
+    label: "Backend & Cloud",
+    description: "Proficient in NodeJS and AWS Cloud Services.",
+  },
+];
+
 const About = forwardRef<HTMLElement>((_props, ref) => {
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
+
   return (
-    <section ref={ref} id="about" className="py-20 bg-white">
+    <section ref={ref} id="about" className="py-24 md:py-32 bg-white">
       <Helmet>
         <title>About Me | Hammad Tariq - Full Stack Developer</title>
         <meta name="description" content="Learn about Hammad Tariq, a Full Stack Developer with over 10 years of experience in the web and mobile development industry." />
@@ -19,80 +43,81 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
         <meta name="twitter:image" content="/profile-dp.webp" />
       </Helmet>
       <div className="container mx-auto px-4">
-        {/* Profile Section */}
-        <Suspense fallback={<div className="text-center">Loading...</div>}>
-          <Media />
-        </Suspense>
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          About Me
-        </h2>
+        <div
+          ref={revealRef}
+          className={`grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-20 items-start transition-all duration-700 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
+          <div className="lg:sticky lg:top-28">
+            <div className="mb-8 flex justify-center lg:justify-start">
+              <Suspense
+                fallback={
+                  <div className="h-40 w-40 animate-pulse rounded-full bg-gray-100 md:h-48 md:w-48" />
+                }
+              >
+                <Media />
+              </Suspense>
+            </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <Code size={48} className="mx-auto mb-4 text-blue-600" />
-            <h3 className="text-xl font-semibold mb-2">Web Development</h3>
-            <p>
-              Expertise in <strong>React</strong>, <strong>Angular</strong>,{" "}
-              <strong>NextJS</strong> and modern JavaScript frameworks.
-            </p>
+            <div className="rounded-3xl border border-gray-200 divide-y divide-gray-100">
+              {capabilities.map(({ icon: Icon, label, description }) => (
+                <div key={label} className="flex items-start gap-4 p-5">
+                  <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                    <Icon size={20} strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-950">{label}</h3>
+                    <p className="mt-1 text-sm text-gray-600">{description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="text-center">
-            <Smartphone size={48} className="mx-auto mb-4 text-blue-600" />
-            <h3 className="text-xl font-semibold mb-2">Mobile Development</h3>
-            <p>
-              Creating Hybrid and Native mobile applications using{" "}
-              <strong>React Native</strong> and <strong>Ionic</strong>.
+
+          <div>
+            <h2 className="mb-6 text-3xl font-bold tracking-tight text-gray-950 md:text-4xl">
+              About Me
+            </h2>
+            <p className="max-w-[65ch] text-lg leading-relaxed text-gray-600">
+              Struggling to find a <strong className="text-gray-950">full stack developer</strong> who truly
+              understands your vision? with over <strong className="text-gray-950">10 years</strong> of
+              expertise in the <strong className="text-gray-950">Javascript</strong> ecosystem? I’ve delivered
+              scalable web applications and enterprise solutions for{" "}
+              <strong className="text-gray-950">Fortune 500</strong> companies like{" "}
+              <strong className="text-gray-950">Macy’s</strong>, <strong className="text-gray-950">Gap</strong>,{" "}
+              <strong className="text-gray-950">Williams-Sonoma</strong>, and{" "}
+              <strong className="text-gray-950">Prologis</strong>, building scalable, high-performance systems
+              designed to meet diverse business needs. Let’s bring your ideas to life with solutions tailored
+              to your unique goals.
             </p>
-          </div>
-          <div className="text-center">
-            <Server size={48} className="mx-auto mb-4 text-blue-600" />
-            <h3 className="text-xl font-semibold mb-2">Backend & Cloud</h3>
-            <p>
-              Proficient in <strong>NodeJS</strong> and{" "}
-              <strong>AWS Cloud Services</strong>.
+            <p className="mt-6 max-w-[65ch] text-lg leading-relaxed text-gray-600">
+              My focus on seamless communication, attention to detail, and results-driven development
+              guarantees a stress-free experience from start to finish.
+            </p>
+            <p className="mt-6 max-w-[65ch] text-lg leading-relaxed text-gray-600">
+              Explore my portfolio for a glimpse into my work. Ready to discuss your project?{" "}
+              <a
+                href="https://wa.me/923312627056"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-blue-600 underline-offset-4 hover:underline"
+              >
+                Reach out on WhatsApp
+              </a>{" "}
+              for a custom order or schedule a{" "}
+              <a
+                href="https://calendly.com/hammadtariq65"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-blue-600 underline-offset-4 hover:underline"
+              >
+                free video consultation
+              </a>{" "}
+              today!
             </p>
           </div>
         </div>
-
-        <p className="mt-12 text-lg text-center max-w-5xl mx-auto">
-          Struggling to find a <strong>full stack developer</strong> who truly
-          understands your vision? with over <strong>10 years</strong> of
-          expertise in the
-          <strong> Javascript </strong>ecosystem? I’ve delivered scalable web
-          applications and enterprise solutions for <strong>Fortune 500</strong>{" "}
-          companies like <strong>Macy’s</strong>, <strong>Gap</strong>,{" "}
-          <strong>Williams-Sonoma</strong>, and <strong>Prologis</strong>,
-          building scalable, high-performance systems designed to meet diverse
-          business needs. Let’s bring your ideas to life with solutions tailored
-          to your unique goals.
-          <br />
-          <br />
-          My focus on seamless communication, attention to detail, and
-          results-driven development guarantees a stress-free experience from
-          start to finish.
-          <br />
-          <br />
-          Explore my portfolio for a glimpse into my work. Ready to discuss your
-          project?{" "}
-          <a
-            href="https://wa.me/923312627056"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            Reach out on WhatsApp
-          </a>{" "}
-          for a custom order or schedule a{" "}
-          <a
-            href="https://calendly.com/hammadtariq65"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            free video consultation
-          </a>{" "}
-          today!
-        </p>
       </div>
     </section>
   );

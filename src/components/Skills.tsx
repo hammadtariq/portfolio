@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 
 import TechStack from "./TechStack";
 import { TechnologyCategory } from "../types/projectTypes";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 const toolsAndTechnologies: TechnologyCategory[] = [
   {
@@ -82,8 +83,10 @@ const toolsAndTechnologies: TechnologyCategory[] = [
 ];
 
 const Skills = forwardRef<HTMLElement>((_props, ref) => {
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
+
   return (
-    <section ref={ref} id="skills" className="py-20 bg-gray-100">
+    <section ref={ref} id="skills" className="py-24 md:py-32 bg-gray-50">
       <Helmet>
         <title>Skills & Technologies | Hammad Tariq - Full Stack Developer</title>
         <meta
@@ -110,28 +113,33 @@ const Skills = forwardRef<HTMLElement>((_props, ref) => {
         <meta name="twitter:image" content="/profile-dp.webp" />
       </Helmet>
 
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Skills</h2>
-      <div className="container mx-auto px-5 bg-white rounded-lg shadow-md overflow-hidden">
-        {toolsAndTechnologies?.length > 0 && (
-          <>
-            <div className="mt-2 flex flex-wrap gap-2">
-              <div className="mt-2">
-                {toolsAndTechnologies.map((category, idx) => (
-                  <div key={idx} className="my-4 italic">
-                    <h4 className="font-semibold text-base mb-2">
-                      {category.category}:
-                    </h4>
-                    <div className="flex flex-wrap gap-2 my-7">
-                      {category.technologies.map((tech, techIdx) => (
-                        <TechStack key={techIdx} tech={tech} classNames="w-7 h-7"/>
-                      ))}
-                    </div>
-                  </div>
+      <div className="container mx-auto px-4">
+        <h2 className="mb-12 text-3xl font-bold tracking-tight text-gray-950 md:text-4xl">
+          Skills
+        </h2>
+
+        <div
+          ref={revealRef}
+          className={`grid grid-cols-1 gap-6 transition-all duration-700 ease-out md:grid-cols-2 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+        >
+          {toolsAndTechnologies.map((category) => (
+            <div
+              key={category.category}
+              className="rounded-3xl border border-gray-200 bg-white p-6"
+            >
+              <h3 className="mb-4 text-sm font-semibold text-gray-950">
+                {category.category}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {category.technologies.map((tech) => (
+                  <TechStack key={tech} tech={tech} classNames="w-4 h-4" />
                 ))}
               </div>
             </div>
-          </>
-        )}
+          ))}
+        </div>
       </div>
     </section>
   );
