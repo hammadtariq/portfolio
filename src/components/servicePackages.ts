@@ -10,7 +10,7 @@ export interface ServicePackage {
 export const servicePackages = [
   {
     name: "Custom SaaS Product Build",
-    startingPrice: "$12,000",
+    startingPrice: "$3,500",
     bestFor:
       "Founders starting a new SaaS product who need a senior technical partner from scope through launch.",
     outcome:
@@ -25,7 +25,7 @@ export const servicePackages = [
   },
   {
     name: "Vibe-Coded App Rescue",
-    startingPrice: "$2,500",
+    startingPrice: "$1,500",
     bestFor:
       "Founders whose Lovable, Cursor, Replit, Base44, or Claude-built prototype is unstable, unsafe, or blocked from launch.",
     outcome:
@@ -40,7 +40,7 @@ export const servicePackages = [
   },
   {
     name: "SaaS Scale & Performance",
-    startingPrice: "$3,500",
+    startingPrice: "$2,500",
     bestFor:
       "Teams with a stable, live SaaS product that is becoming slow, fragile, expensive, or difficult to extend as usage grows.",
     outcome:
@@ -55,7 +55,7 @@ export const servicePackages = [
   },
   {
     name: "Custom RAG & AI Agent",
-    startingPrice: "$4,500",
+    startingPrice: "$3,000",
     bestFor:
       "Businesses that need an intelligent assistant grounded in documents, listings, operational data, or approved tools.",
     outcome:
@@ -70,7 +70,7 @@ export const servicePackages = [
   },
   {
     name: "Business Workflow Automation & Integration",
-    startingPrice: "$2,000",
+    startingPrice: "$1,000",
     bestFor:
       "Businesses whose staff repeatedly move information between forms, email, spreadsheets, CRMs, payments, and admin tools.",
     outcome:
