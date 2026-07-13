@@ -4,7 +4,7 @@
 
 Replace the portfolio's broad three-item Services presentation with five distinct, outcome-led packages. The package set must communicate Hammad's core strength in building SaaS products from the ground up while also addressing current demand for vibe-coded app productionization, AI agents, and business automation.
 
-The section remains in the existing landing-page position between Projects and Testimonials and keeps the `services` anchor for navigation compatibility.
+The section remains in the existing landing-page position between Projects and Testimonials and keeps the `services` anchor for navigation compatibility. It shows starting prices to qualify expectations without presenting fixed-scope checkout tiers.
 
 ## Audience
 
@@ -22,11 +22,13 @@ The buyer journey is:
 
 > New product → Broken prototype → Growing product → Intelligent agent → Manual workflow
 
-No pricing appears on the landing page. Every package leads to a discovery conversation because final scope depends on the existing system, required workflows, data, integrations, and risk.
+Every package shows a starting price. Final scope still follows a discovery conversation because the existing system, required workflows, data, integrations, and risk can materially change the engagement.
 
 ## Package Catalog
 
 ### 1. Custom SaaS Product Build
+
+**Starting price:** $12,000
 
 **Buyer situation:** The client is starting a new SaaS product and needs an experienced technical partner to take it from an idea to a working release.
 
@@ -45,6 +47,8 @@ No pricing appears on the landing page. Every package leads to a discovery conve
 
 ### 2. Vibe-Coded App Rescue
 
+**Starting price:** $2,500
+
 **Buyer situation:** A prototype built with tools such as Lovable, Cursor, Replit, Base44, or Claude exists, but bugs, security gaps, or unreliable workflows prevent confident launch or continued use.
 
 **Outcome:** A safer, more reliable application with business-critical risks addressed in priority order.
@@ -61,6 +65,8 @@ No pricing appears on the landing page. Every package leads to a discovery conve
 **Boundary:** This package stabilizes the current product. It does not provide major growth architecture or build a separate product from scratch.
 
 ### 3. SaaS Scale & Performance
+
+**Starting price:** $3,500
 
 **Buyer situation:** A stable, live SaaS product has users but is becoming slow, fragile, expensive, or difficult to extend as traffic and data increase.
 
@@ -79,6 +85,8 @@ No pricing appears on the landing page. Every package leads to a discovery conve
 
 ### 4. Custom RAG & AI Agent
 
+**Starting price:** $4,500
+
 **Buyer situation:** The client needs an intelligent assistant that can answer from business knowledge, reason over live data, or use approved tools to complete tasks.
 
 **Outcome:** A grounded AI assistant that produces useful answers and actions within clearly defined safety boundaries.
@@ -95,6 +103,8 @@ No pricing appears on the landing page. Every package leads to a discovery conve
 **Boundary:** The intelligent agent is the product's central capability. General system-to-system automation belongs in the workflow package.
 
 ### 5. Business Workflow Automation & Integration
+
+**Starting price:** $2,000
 
 **Buyer situation:** Staff repeatedly move information between forms, email, spreadsheets, CRMs, payment tools, admin panels, or other disconnected systems.
 
@@ -133,6 +143,7 @@ Use a buyer-friendly package index rather than seven cards, pricing columns, or 
 Each package row contains:
 
 - Package name
+- Starting price
 - A short buyer-situation sentence beginning from the pain
 - One outcome-focused sentence
 - Three concise included capabilities
@@ -145,11 +156,18 @@ Longer deliverable lists remain in the source specification and should be distil
 
 `Discuss this package` opens an email link addressed to `hammadtariq65@gmail.com`. The subject line identifies the selected package so the conversation begins with useful context. The page's primary booking CTA remains in the later Contact section; package actions are contextual secondary conversions.
 
+After the package index, show a separate flexible-engagement band:
+
+> Need flexible senior support? Work with me at $75/hour.
+
+The band is intended for advisory work, evolving feature development, and ongoing technical support. A concise pricing note states that package prices are starting points, final scope follows discovery, and third-party services or API usage are billed separately.
+
 ## Visual Direction
 
 - Keep the section light to preserve the dark → light → dark rhythm around Projects, Packages, and Testimonials.
 - Use near-black for primary type and the established magenta accent sparingly for active and hover states.
 - Give the SaaS package slightly more visual weight through spacing and typography, not a generic "Most Popular" badge.
+- Present price as supporting qualification information, not the dominant visual element.
 - Use varied row composition and whitespace rather than equal-height cards.
 - Keep body text within approximately 65 characters per line where practical.
 - Avoid technology logos, pricing tiers, generic checkmark lists, and decorative gradients.
@@ -178,11 +196,15 @@ Longer deliverable lists remain in the source specification and should be distil
 - Keep the content static; no API or content-management dependency is required.
 - Use the existing icon library and interaction conventions.
 - Do not introduce a pricing model, package comparison state, modal, or new dependency.
+- Keep pricing values in the typed package content so the displayed offer remains auditable.
 
 ## Testing and Acceptance Criteria
 
 - The section renders exactly five packages in the approved order.
 - Every package has a unique buyer situation and boundary.
+- Every package shows its approved starting price: $12,000, $2,500, $3,500, $4,500, and $2,000 in package order.
+- The flexible-engagement band shows the $75/hour rate and explains its intended use.
+- The pricing note clarifies discovery-based scope and excludes third-party service and API usage costs.
 - The five package names are visible in the document heading structure.
 - Every contextual action includes its package name and correct email subject.
 - The existing `services` anchor and header navigation continue to work.
@@ -193,7 +215,7 @@ Longer deliverable lists remain in the source specification and should be distil
 
 ## Out of Scope
 
-- Pricing or delivery-time promises
+- Detailed pricing tiers, checkout, or delivery-time promises
 - Full service catalog presentation
 - Dedicated package detail routes
 - Checkout or direct purchasing
