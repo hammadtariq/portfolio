@@ -82,11 +82,30 @@ const toolsAndTechnologies: TechnologyCategory[] = [
   },
 ];
 
+const categorySurfaces = [
+  "border-blue-200/80 bg-[linear-gradient(135deg,rgba(219,234,254,0.88),rgba(255,255,255,0.92))]",
+  "border-cyan-200/80 bg-[linear-gradient(135deg,rgba(207,250,254,0.82),rgba(255,255,255,0.94))]",
+  "border-slate-200 bg-white/90",
+  "border-indigo-200/80 bg-[linear-gradient(135deg,rgba(224,231,255,0.7),rgba(255,255,255,0.94))]",
+  "border-blue-200/80 bg-[linear-gradient(135deg,rgba(219,234,254,0.72),rgba(255,255,255,0.96))]",
+  "border-slate-200 bg-white/90",
+  "border-cyan-200/80 bg-[linear-gradient(135deg,rgba(236,254,255,0.96),rgba(255,255,255,0.92))]",
+  "border-indigo-200/80 bg-[linear-gradient(135deg,rgba(238,242,255,0.9),rgba(255,255,255,0.96))]",
+];
+
 const Skills = forwardRef<HTMLElement>((_props, ref) => {
   const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
 
   return (
-    <section ref={ref} id="skills" className="py-24 md:py-32 bg-gray-50">
+    <section
+      ref={ref}
+      id="skills"
+      className="relative overflow-hidden bg-slate-50 py-24 md:py-32"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_8%,rgba(186,230,253,0.52),transparent_22%),radial-gradient(circle_at_8%_82%,rgba(219,234,254,0.7),transparent_20%)]"
+      />
       <Helmet>
         <title>Skills & Technologies | Hammad Tariq - Full Stack Developer</title>
         <meta
@@ -113,23 +132,29 @@ const Skills = forwardRef<HTMLElement>((_props, ref) => {
         <meta name="twitter:image" content="/profile-dp.webp" />
       </Helmet>
 
-      <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-3xl font-bold tracking-tight text-gray-950 md:text-4xl">
-          Skills
-        </h2>
+      <div className="container relative mx-auto px-4">
+        <div className="max-w-2xl">
+          <p className="mb-4 text-sm font-medium text-blue-700">Capabilities</p>
+          <h2 className="text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
+            The stack behind the work
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-slate-600">
+            A practical toolkit for designing reliable systems from interface to infrastructure.
+          </p>
+        </div>
 
         <div
           ref={revealRef}
-          className={`grid grid-cols-1 gap-6 transition-all duration-700 ease-out md:grid-cols-2 ${
+          className={`mt-12 grid grid-cols-1 gap-5 transition-all duration-700 ease-out md:grid-cols-2 md:gap-6 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          {toolsAndTechnologies.map((category) => (
+          {toolsAndTechnologies.map((category, index) => (
             <div
               key={category.category}
-              className="rounded-3xl border border-gray-200 bg-white p-6"
+              className={`rounded-[2rem] border p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_14px_36px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_20px_44px_rgba(37,99,235,0.12)] motion-reduce:transition-none ${categorySurfaces[index]}`}
             >
-              <h3 className="mb-4 text-sm font-semibold text-gray-950">
+              <h3 className="mb-5 text-base font-semibold tracking-tight text-slate-950">
                 {category.category}
               </h3>
               <div className="flex flex-wrap gap-2">

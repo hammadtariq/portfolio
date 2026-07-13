@@ -190,7 +190,15 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
   }, [popupData]);
 
   return (
-    <section ref={ref} id="projects" className="py-24 md:py-32 bg-gray-50">
+    <section
+      ref={ref}
+      id="projects"
+      className="relative overflow-hidden bg-slate-950 py-24 text-white md:py-32"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_14%,rgba(37,99,235,0.32),transparent_25%),radial-gradient(circle_at_90%_70%,rgba(14,165,233,0.14),transparent_24%)]"
+      />
       <Helmet>
         <title>Projects | Hammad Tariq - Full Stack Developer</title>
         <meta name="description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
@@ -204,11 +212,12 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
         <meta name="twitter:description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
         <meta name="twitter:image" content="/profile-dp.webp" />
       </Helmet>
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-950">
-          Projects
+      <div className="container relative mx-auto px-4">
+        <p className="mb-4 text-sm font-medium text-blue-200">Projects</p>
+        <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
+          Selected product work
         </h2>
-        <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-gray-600">
+        <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-slate-300">
           A selection of products I&apos;ve designed, built, and shipped for
           clients across hospitality, logistics, and Web3.
         </p>
@@ -220,7 +229,7 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
             onShowDetails={() => setPopupData(spotlight)}
           />
 
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {visibleRest.map((project, index) => (
               <CompactProjectCard
                 key={project.title}
@@ -235,7 +244,7 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
           {remainingCount > 0 && (
             <div className="mt-8 flex justify-center">
               <button
-                className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:border-gray-400 hover:bg-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-blue-300/60 hover:bg-blue-500/20"
                 onClick={() => setShowAll(true)}
               >
                 Show {remainingCount} more projects
@@ -261,7 +270,7 @@ const ImpactLine: React.FC<{ impact: string; className?: string }> = ({
   className = "",
 }) => (
   <div
-    className={`inline-flex items-center gap-1.5 font-semibold text-blue-600 ${className}`}
+    className={`inline-flex items-center gap-1.5 font-semibold text-blue-300 ${className}`}
   >
     <TrendingUp size={14} className="flex-none" />
     {impact}
@@ -278,7 +287,7 @@ const ProjectFooter: React.FC<{
         href={project.liveLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-500"
+        className="inline-flex items-center gap-1.5 rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-400"
       >
         View Live
         <ExternalLink size={14} />
@@ -286,7 +295,7 @@ const ProjectFooter: React.FC<{
     )}
     <div className="flex items-center gap-4">
       <button
-        className="inline-flex items-center gap-1 text-sm font-medium text-gray-600 transition-colors duration-200 hover:text-gray-950"
+        className="inline-flex items-center gap-1 text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white"
         onClick={onShowDetails}
       >
         Details
@@ -298,7 +307,7 @@ const ProjectFooter: React.FC<{
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${project.title} on GitHub`}
-          className="text-gray-400 transition-colors duration-200 hover:text-gray-950"
+          className="text-slate-400 transition-colors duration-200 hover:text-white"
         >
           <Github size={18} />
         </a>
@@ -317,33 +326,39 @@ const SpotlightCard: React.FC<{
 
   return (
     <div
-      className={`group flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white transition-all duration-700 ease-out hover:shadow-xl lg:col-span-12 lg:flex-row ${
+      className={`group flex flex-col overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_50px_rgba(2,6,23,0.24)] backdrop-blur-xl transition-all duration-700 ease-out hover:-translate-y-1 hover:border-blue-300/35 lg:col-span-12 lg:flex-row ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
     >
-      <div className="overflow-hidden lg:w-[45%]">
+      <div className="relative overflow-hidden lg:w-[45%]">
         <LazyLoadImg
           src={project.image}
           alt={project.title}
           classNames="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 lg:h-full"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-blue-500/20" />
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-8 lg:w-[55%]">
         {project.impact && <ImpactLine impact={project.impact} />}
-        <h3 className="mt-2 text-2xl font-bold tracking-tight text-gray-950">
+        <h3 className="mt-2 text-2xl font-bold tracking-tight text-white">
           {project.title}
         </h3>
-        <p className="mt-3 leading-relaxed text-gray-600 line-clamp-3 lg:line-clamp-4">
+        <p className="mt-3 leading-relaxed text-slate-300 line-clamp-3 lg:line-clamp-4">
           {project.description}
         </p>
 
         {visibleTechs.length > 0 && (
           <div className="mt-5 flex flex-wrap gap-2">
             {visibleTechs.map((tech) => (
-              <TechStack key={tech} tech={tech} classNames="w-3.5 h-3.5" />
+              <TechStack
+                key={tech}
+                tech={tech}
+                variant="dark"
+                classNames="w-3.5 h-3.5"
+              />
             ))}
             {hiddenTechCount > 0 && (
-              <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-500">
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-300">
                 +{hiddenTechCount} more
               </span>
             )}
@@ -369,24 +384,25 @@ const CompactProjectCard: React.FC<{
 
   return (
     <button
-      className={`group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white text-left transition-all duration-700 ease-out hover:shadow-lg ${
+      className={`group flex flex-col overflow-hidden rounded-[1.5rem] border border-white/12 bg-white/[0.06] text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 ease-out hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/[0.1] ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
       style={{ transitionDelay: isVisible ? `${delayMs}ms` : "0ms" }}
       onClick={onShowDetails}
     >
-      <div className="overflow-hidden">
+      <div className="relative overflow-hidden">
         <LazyLoadImg
           src={project.image}
           alt={project.title}
-          classNames="h-28 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          classNames="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/55 to-blue-500/10" />
       </div>
       <div className="flex flex-1 flex-col p-4">
         {project.impact && (
           <ImpactLine impact={project.impact} className="text-[11px]" />
         )}
-        <h3 className="mt-1 line-clamp-2 text-sm font-bold text-gray-950">
+        <h3 className="mt-1 line-clamp-2 text-sm font-bold text-white">
           {project.title}
         </h3>
 
@@ -398,14 +414,14 @@ const CompactProjectCard: React.FC<{
               </span>
             ))}
             {hiddenTechCount > 0 && (
-              <span className="text-xs font-medium text-gray-400">
+              <span className="text-xs font-medium text-slate-400">
                 +{hiddenTechCount}
               </span>
             )}
           </div>
         )}
 
-        <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-medium text-gray-600 transition-colors duration-200 group-hover:text-gray-950">
+        <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-medium text-slate-300 transition-colors duration-200 group-hover:text-white">
           Details
           <ArrowRight size={12} />
         </span>
@@ -419,15 +435,18 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
   onClose,
 }) => (
   <div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/70 p-4 backdrop-blur-sm"
+    className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-md"
     onClick={onClose}
   >
     <div
-      className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-gray-100 bg-white shadow-2xl"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-dialog-title"
+      className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-white/15 bg-slate-900 text-white shadow-2xl"
       onClick={(event) => event.stopPropagation()}
     >
       <button
-        className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white/90 text-gray-500 backdrop-blur transition-colors duration-200 hover:bg-gray-50 hover:text-gray-950"
+        className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-slate-300 backdrop-blur transition-colors duration-200 hover:bg-white/15 hover:text-white"
         onClick={onClose}
         aria-label="Close project details"
       >
@@ -437,14 +456,14 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
       <LazyLoadImg
         src={project.image}
         alt={project.title}
-        classNames="h-56 w-full rounded-t-3xl object-cover md:h-64"
+        classNames="h-56 w-full rounded-t-[2rem] object-cover md:h-64"
       />
 
       <div className="p-6 md:p-8">
         {project.impact && (
           <ImpactLine impact={project.impact} className="text-sm" />
         )}
-        <h2 className="mt-2 text-2xl font-bold tracking-tight text-gray-950">
+        <h2 id="project-dialog-title" className="mt-2 text-2xl font-bold tracking-tight text-white">
           {project.title}
         </h2>
         {project.liveLink && (
@@ -452,7 +471,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-500"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-blue-400"
           >
             View Live
             <ExternalLink size={14} />
@@ -460,7 +479,7 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
         )}
 
         <div
-          className="mt-4 leading-relaxed text-gray-600 [&_br]:hidden [&_li]:leading-relaxed [&_p:last-child]:mb-0 [&_p]:mb-4 [&_strong]:font-semibold [&_strong]:text-gray-950 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5"
+          className="mt-4 leading-relaxed text-slate-300 [&_br]:hidden [&_li]:leading-relaxed [&_p:last-child]:mb-0 [&_p]:mb-4 [&_strong]:font-semibold [&_strong]:text-white [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5"
           dangerouslySetInnerHTML={{
             __html: project.detailDescription ?? "",
           }}
@@ -468,12 +487,17 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
 
         {project.techs && project.techs.length > 0 && (
           <div className="mt-2">
-            <h3 className="text-sm font-semibold text-gray-950">
+            <h3 className="text-sm font-semibold text-white">
               Tech Stack
             </h3>
             <div className="mt-3 flex flex-wrap gap-2">
               {project.techs.map((tech) => (
-                <TechStack key={tech} tech={tech} classNames="w-3.5 h-3.5" />
+                <TechStack
+                  key={tech}
+                  tech={tech}
+                  variant="dark"
+                  classNames="w-3.5 h-3.5"
+                />
               ))}
             </div>
           </div>
