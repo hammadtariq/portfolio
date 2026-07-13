@@ -3,19 +3,15 @@ import { describe, expect, it } from "vitest";
 import Footer from "./Footer";
 
 describe("Footer", () => {
-  it("ends the page with a contact action and social links", () => {
+  it("ends the page with identity, social links, and a back-to-top action", () => {
     render(<Footer />);
 
-    expect(
-      screen.getByRole("heading", { name: "Have a product worth shipping?" }),
-    ).toBeVisible();
-    expect(
-      screen.getByRole("link", { name: "Start a conversation" }),
-    ).toHaveAttribute("href", "mailto:hammadtariq65@gmail.com");
-    expect(screen.getByRole("contentinfo")).toHaveAttribute("id", "contact");
+    expect(screen.getByRole("contentinfo")).toBeVisible();
+    expect(screen.getByRole("link", { name: "Hammad Tariq" })).toHaveAttribute("href", "#hero");
     expect(screen.getByRole("link", { name: "GitHub" })).toHaveAttribute(
       "href",
       "https://github.com/hammadtariq",
     );
+    expect(screen.getByRole("link", { name: "Back to top" })).toHaveAttribute("href", "#hero");
   });
 });

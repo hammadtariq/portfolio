@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react'
 
 interface HeaderProps {
   onAboutClick: () => void
+  onServicesClick: () => void
   onSkillsClick: () => void
   onExperiencesClick: () => void
   onProjectsClick: () => void
@@ -20,6 +21,7 @@ const GLASS_LIGHT =
 
 export default function Header({
   onAboutClick,
+  onServicesClick,
   onSkillsClick,
   onProjectsClick,
   onExperiencesClick,
@@ -47,11 +49,12 @@ export default function Header({
   const closeMenu = () => setIsMenuOpen(false)
 
   const navItems = [
+    { label: 'Work', onClick: onProjectsClick },
+    { label: 'Services', onClick: onServicesClick },
+    { label: 'Proof', onClick: onTestimonialsClick },
+    { label: 'Experience', onClick: onExperiencesClick },
     { label: 'About', onClick: onAboutClick },
-    { label: 'Skills', onClick: onSkillsClick },
-    { label: 'Experiences', onClick: onExperiencesClick },
-    { label: 'Projects', onClick: onProjectsClick },
-    { label: 'Testimonials', onClick: onTestimonialsClick },
+    { label: 'Stack', onClick: onSkillsClick },
     { label: 'Contact', onClick: onContactClick },
   ]
 
@@ -72,7 +75,7 @@ export default function Header({
             Hammad Tariq
           </span>
 
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -80,7 +83,7 @@ export default function Header({
                 className={`relative py-2 text-sm font-medium transition-colors duration-200 after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-0 after:transition-all after:duration-300 hover:after:w-full ${
                   isOverHero
                     ? 'text-white/85 hover:text-white after:bg-white'
-                    : 'text-gray-600 hover:text-gray-950 after:bg-blue-600'
+                    : 'text-black/75 hover:text-black after:bg-black'
                 }`}
               >
                 {item.label}

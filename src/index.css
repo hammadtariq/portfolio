@@ -3,17 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
-  --secondary: #10b981;
-  --accent: #8b5cf6;
-  --background: #f3f4f6;
-  --foreground: #1f2937;
+  --canvas: #0c0c0c;
+  --ink: #0f172a;
+  --ivory: #d7e2ea;
+  --background: #0c0c0c;
+  --foreground: #d7e2ea;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.gradient-cta {
+  background: linear-gradient(123deg, #18011f 7%, #b600a8 37%, #7621b0 72%, #be4c00 100%);
 }
 
 @keyframes fadeIn {
@@ -130,7 +149,7 @@ body {
   position: fixed;
   bottom: 80px;
   right: 15px;
-  z-index: 999;
+  z-index: 40;
   background-color: transparent;
 }
 

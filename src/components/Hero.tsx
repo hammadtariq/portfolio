@@ -4,7 +4,7 @@ import HeroBackgroundVideo from "./HeroBackgroundVideo";
 import Media from "./Media";
 
 const badgeClass =
-  "inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md sm:text-sm";
+  "inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-medium text-white backdrop-blur-md sm:text-sm";
 
 export default function Hero({
   onProjectsClick,
@@ -22,7 +22,7 @@ export default function Hero({
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,8,0.94)_0%,rgba(5,5,8,0.7)_52%,rgba(5,5,8,0.3)_100%),linear-gradient(0deg,rgba(5,5,8,0.94)_0%,transparent_65%)]"
       />
 
       <div className="relative flex min-h-[100dvh] items-end">
@@ -45,32 +45,38 @@ export default function Hero({
               </div>
             </div>
 
-            <div className="max-w-xl">
-              <h1
-                className="animate-slideIn text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-white"
+            <div className="max-w-3xl">
+              <p
+                className="animate-slideIn mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-fuchsia-200"
                 style={{ animationDelay: "0ms" }}
               >
-                I build full-stack products in React, Node, and AWS.
+                Full-stack engineering · AI systems · product rescue
+              </p>
+              <h1
+                className="animate-slideIn max-w-[15ch] text-5xl font-black leading-[0.98] tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl"
+                style={{ animationDelay: "40ms" }}
+              >
+                I turn ambitious products into dependable software.
               </h1>
               <p
                 className="animate-slideIn mt-6 text-lg text-white/80 leading-relaxed max-w-[48ch]"
                 style={{ animationDelay: "120ms" }}
               >
-                Ten years shipping production systems for teams at Macy's, Gap,
-                Williams-Sonoma, and Prologis.
+                Ten years shipping production systems, rescuing difficult
+                codebases, and building AI products that hold up under real use.
               </p>
               <div
                 className="animate-slideIn mt-10 flex flex-col sm:flex-row gap-3"
                 style={{ animationDelay: "220ms" }}
               >
+                <ScheduleCall label="Book a free consultation" />
                 <button
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-blue-500"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-6 py-3 font-semibold text-white transition duration-300 hover:border-white/70 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:translate-y-px motion-reduce:transition-none"
                   onClick={onProjectsClick}
                 >
-                  View My Work
+                  Explore selected work
                   <ArrowRight size={18} />
                 </button>
-                <ScheduleCall />
               </div>
             </div>
           </div>

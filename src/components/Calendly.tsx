@@ -16,7 +16,7 @@ export default function ScheduleCall({
   return (
     <div>
       <button
-        className={`inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/80 px-6 py-3 font-semibold text-white transition-colors duration-300 hover:bg-white hover:text-gray-950 ${className}`}
+        className={`gradient-cta inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 px-6 py-3 font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_14px_34px_rgba(182,0,168,0.24)] transition duration-300 hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:translate-y-px motion-reduce:transition-none ${className}`}
         onClick={() => setShowModal(true)}
       >
         {label}
