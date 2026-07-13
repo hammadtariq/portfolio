@@ -243,7 +243,7 @@ The pattern is common: AI-generated code demos well, then breaks on real data. F
 The hard part isn't calling one API; it's orchestrating many. I engineered the routing layer across OpenAI, Gemini, and Anthropic, plus Replicate, ElevenLabs, and OpenRouter for image, video, and audio models, with state management that lets users switch models mid-chat without losing context.
 
 I also built secure file pipelines for image-to-video workflows and a tiered subscription engine with per-tier usage limits, designed to GDPR and SOC 2 requirements.`,
-    image: "/Generaxi.webp",
+    image: "/generaxi.webp",
     techs: ["Svelte", "NodeJS", "API Integration", "Generative AI", "AI Model Integration"],
   },
   {

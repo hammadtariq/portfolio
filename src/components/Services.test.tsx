@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import Services from "./Services";
+import { servicePackages } from "./servicePackages";
 
 const packageNames = [
   "Custom SaaS Product Build",
@@ -9,8 +10,6 @@ const packageNames = [
   "Custom RAG & AI Agent",
   "Business Workflow Automation & Integration",
 ];
-
-const approvedPrices = ["$3,500", "$1,500", "$2,500", "$3,000", "$1,000"];
 
 describe("Services", () => {
   it("renders the five distinct packages in the approved order", () => {
@@ -124,7 +123,9 @@ describe("Services", () => {
     render(<Services />);
 
     screen.getAllByRole("article").forEach((article, index) =>
-      expect(within(article).getByText(approvedPrices[index])).toBeVisible(),
+      expect(
+        within(article).getByText(servicePackages[index].startingPrice),
+      ).toBeVisible(),
     );
     expect(screen.getByText("$45/hour")).toBeVisible();
     expect(
