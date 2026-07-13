@@ -76,6 +76,33 @@ body {
   -webkit-backdrop-filter: blur(28px) saturate(160%);
 }
 
+/* A subtle Safari-style overlay treatment for long project details. */
+.project-detail-scroll {
+  clip-path: inset(0 round 2rem);
+  scrollbar-color: rgb(191 219 254 / 0.5) transparent;
+  scrollbar-width: thin;
+}
+
+.project-detail-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.project-detail-scroll::-webkit-scrollbar-track {
+  margin-block: 18px;
+  background: transparent;
+}
+
+.project-detail-scroll::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+  background-color: rgb(191 219 254 / 0.46);
+}
+
+.project-detail-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(219 234 254 / 0.72);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fadeIn,
   .animate-slideIn {

@@ -22,8 +22,28 @@ describe("Projects", () => {
     expect(dialog).toBeVisible();
     expect(
       within(dialog).getByRole("heading", {
-        name: "Hospitality Inn - QR Menu Service",
+        name: "AI Agent on a Live Inventory System | Claude MCP Chatbot + Analytics",
       }),
     ).toBeVisible();
+  });
+
+  it("renders the full approved Upwork case-study lineup", () => {
+    render(<Projects />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /Show 5 more projects/ }),
+    );
+
+    expect(
+      screen.getByRole("heading", {
+        name: "AI Document Extraction from Engineering Drawings | Computer Vision",
+      }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", {
+        name: "Audio Timeline Editor with Live Collaboration | React",
+      }),
+    ).toBeVisible();
+    expect(screen.queryByText("NFT Marketplace")).not.toBeInTheDocument();
   });
 });
