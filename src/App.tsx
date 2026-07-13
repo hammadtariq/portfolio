@@ -13,6 +13,7 @@ import Testimonials from "./components/Testimonials";
 import ContactCTA from "./components/ContactCTA";
 import Footer from "./components/Footer";
 import WhatsApp from "./components/WhatsApp";
+import ShutterSplash from "./components/ShutterSplash";
 
 import experiencesData from "./assets/experiences.json";
 
@@ -44,6 +45,7 @@ export default function Portfolio() {
 
   return (
     <div className="bg-slate-950 text-slate-900">
+      <ShutterSplash />
       <Helmet>
         <meta charSet="utf-8" />
         <title>Hammad Tariq | Full Stack Developer - React, Node.js, AWS, Blockchain</title>
