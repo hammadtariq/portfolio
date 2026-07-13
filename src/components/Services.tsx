@@ -1,55 +1,90 @@
 import { forwardRef } from "react";
-import { ArrowDownRight, Bot, Layers3, LifeBuoy } from "lucide-react";
-
-const services = [
-  {
-    icon: Layers3,
-    title: "Build the product",
-    description:
-      "From architecture through launch: responsive interfaces, dependable APIs, cloud infrastructure, and the decisions connecting them.",
-    details: "React · Node.js · AWS · mobile",
-  },
-  {
-    icon: Bot,
-    title: "Add useful AI",
-    description:
-      "Integrate agents, model orchestration, computer vision, and workflow automation where they create measurable leverage—not demo theatre.",
-    details: "Agents · MCP · multimodal · automation",
-  },
-  {
-    icon: LifeBuoy,
-    title: "Rescue what is stuck",
-    description:
-      "Stabilize inherited or AI-generated code, remove performance bottlenecks, and turn a fragile prototype into software teams can operate.",
-    details: "Audit · debug · scale · ship",
-  },
-];
+import { ArrowDownRight, Check } from "lucide-react";
+import { servicePackages } from "./servicePackages";
 
 const Services = forwardRef<HTMLElement>((_props, ref) => (
-  <section ref={ref} id="services" className="relative overflow-hidden bg-white py-24 text-slate-950 md:py-32">
-    <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-400/70 to-transparent" />
+  <section
+    ref={ref}
+    id="services"
+    className="relative overflow-hidden bg-white py-24 text-slate-950 md:py-32"
+  >
+    <div
+      aria-hidden="true"
+      className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-400/70 to-transparent"
+    />
+
     <div className="container mx-auto px-4">
-      <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-        <h2 className="max-w-[10ch] text-5xl font-black leading-[0.95] tracking-[-0.035em] sm:text-6xl md:text-7xl">
-          Engineering where it matters most.
+      <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+        <h2 className="max-w-[11ch] text-5xl font-black leading-[0.95] tracking-[-0.035em] sm:text-6xl md:text-7xl">
+          Choose the problem. I’ll own the build.
         </h2>
-        <p className="max-w-[58ch] text-lg leading-relaxed text-slate-600 lg:justify-self-end">
-          I work as a senior hands-on partner for founders and teams that need clarity, momentum, and production-level execution across the stack.
+        <p className="max-w-[60ch] text-lg leading-relaxed text-slate-700 lg:justify-self-end">
+          Five focused ways to move from idea, instability, or manual work
+          toward a reliable product. Scope is shaped after a short discovery
+          conversation—never forced into a generic tier.
         </p>
       </div>
 
       <div className="mt-16 border-t border-slate-200">
-        {services.map(({ icon: Icon, title, description, details }) => (
-          <article key={title} className="group grid gap-5 border-b border-slate-200 py-8 md:grid-cols-[auto_0.75fr_1.25fr_auto] md:items-center md:gap-8 md:py-10">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-950 text-white transition duration-300 group-hover:bg-fuchsia-700 motion-reduce:transition-none">
-              <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+        {servicePackages.map((servicePackage, index) => (
+          <article
+            key={servicePackage.name}
+            className={`group border-b border-slate-200 py-9 md:py-12 ${
+              index === 0 ? "md:py-14" : ""
+            }`}
+          >
+            <div className="grid gap-7 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14">
+              <div>
+                {index === 0 && (
+                  <p className="mb-4 text-sm font-semibold text-fuchsia-700">
+                    Core expertise
+                  </p>
+                )}
+                <h3 className="max-w-[16ch] text-3xl font-bold tracking-tight md:text-4xl">
+                  {servicePackage.name}
+                </h3>
+                <p className="mt-5 max-w-[46ch] leading-relaxed text-slate-700">
+                  <strong className="text-slate-950">Best for:</strong>{" "}
+                  {servicePackage.bestFor}
+                </p>
+              </div>
+
+              <div>
+                <p className="max-w-[62ch] text-lg leading-relaxed text-slate-700">
+                  <strong className="text-slate-950">Outcome:</strong>{" "}
+                  {servicePackage.outcome}
+                </p>
+
+                <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {servicePackage.included.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-2.5 text-sm leading-relaxed text-slate-700"
+                    >
+                      <Check
+                        aria-hidden="true"
+                        className="mt-0.5 flex-none text-fuchsia-700"
+                        size={17}
+                        strokeWidth={2.2}
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7 flex flex-col gap-6 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="max-w-[58ch] text-sm leading-relaxed text-slate-600">
+                    <strong className="text-slate-950">Boundary:</strong>{" "}
+                    {servicePackage.boundary}
+                  </p>
+                  <ArrowDownRight
+                    aria-hidden="true"
+                    className="hidden flex-none text-slate-300 transition duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-fuchsia-700 md:block motion-reduce:transition-none"
+                    size={28}
+                  />
+                </div>
+              </div>
             </div>
-            <h3 className="text-2xl font-bold tracking-tight md:text-3xl">{title}</h3>
-            <div>
-              <p className="max-w-[58ch] leading-relaxed text-slate-600">{description}</p>
-              <p className="mt-3 text-sm font-semibold text-slate-950">{details}</p>
-            </div>
-            <ArrowDownRight className="hidden text-slate-300 transition duration-300 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-fuchsia-700 md:block motion-reduce:transition-none" size={28} aria-hidden="true" />
           </article>
         ))}
       </div>
