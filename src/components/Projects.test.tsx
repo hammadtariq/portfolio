@@ -11,6 +11,15 @@ vi.mock("../hooks/useRevealOnScroll", () => ({
 }));
 
 describe("Projects", () => {
+  it("renders project cards immediately without scroll-reveal wrappers", () => {
+    const { container } = render(<Projects />);
+
+    const interactiveCards = container.querySelectorAll(".project-card");
+
+    expect(container.querySelectorAll(".project-reveal")).toHaveLength(0);
+    expect(interactiveCards).toHaveLength(7);
+  });
+
   it("opens the featured project detail dialog", () => {
     render(<Projects />);
 

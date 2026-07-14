@@ -8,7 +8,6 @@ import {
 import LazyLoadImg from "./LazyLoadImg";
 import TechStack from "./TechStack";
 import { TechConfig } from "./TechConfig";
-import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 interface Project {
   title: string;
@@ -356,7 +355,6 @@ const INITIAL_VISIBLE_COUNT = 6;
 const Projects = forwardRef<HTMLElement>((_props, ref) => {
   const [popupData, setPopupData] = useState<Project | null>(null);
   const [showAll, setShowAll] = useState(false);
-  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
 
   const [spotlight, ...rest] = projects;
   const visibleRest = showAll ? rest : rest.slice(0, INITIAL_VISIBLE_COUNT);
@@ -366,7 +364,9 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
     if (!popupData) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setPopupData(null);
+      if (event.key === "Escape") {
+        setPopupData(null);
+      }
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
@@ -405,20 +405,17 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
           clients across hospitality, logistics, and Web3.
         </p>
 
-        <div ref={revealRef} className="mt-16">
+        <div className="mt-16">
           <SpotlightCard
             project={spotlight}
-            isVisible={isVisible}
             onShowDetails={() => setPopupData(spotlight)}
           />
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {visibleRest.map((project, index) => (
+            {visibleRest.map((project) => (
               <CompactProjectCard
                 key={project.title}
                 project={project}
-                isVisible={isVisible}
-                delayMs={Math.min(index, 8) * 60}
                 onShowDetails={() => setPopupData(project)}
               />
             ))}
@@ -427,7 +424,7 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
           {remainingCount > 0 && (
             <div className="mt-8 flex justify-center">
               <button
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-blue-300/60 hover:bg-blue-500/20"
+                className="project-action inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:border-blue-300/60 hover:bg-blue-500/20"
                 onClick={() => setShowAll(true)}
               >
                 Show {remainingCount} more projects
@@ -474,37 +471,33 @@ const ProjectFooter: React.FC<{ onShowDetails: () => void }> = ({
 }) => (
   <div className="mt-auto flex items-center justify-end pt-6">
     <button
-      className="inline-flex items-center gap-1 text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white"
+      className="project-action inline-flex items-center gap-1 text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white"
       onClick={onShowDetails}
     >
       Details
-      <ArrowRight size={14} />
+      <ArrowRight className="project-card__arrow" size={14} />
     </button>
   </div>
 );
 
 const SpotlightCard: React.FC<{
   project: Project;
-  isVisible: boolean;
   onShowDetails: () => void;
-}> = ({ project, isVisible, onShowDetails }) => {
+}> = ({ project, onShowDetails }) => {
   const visibleTechs = project.techs?.slice(0, 6) ?? [];
   const hiddenTechCount = (project.techs?.length ?? 0) - visibleTechs.length;
 
   return (
     <div
-      className={`group flex flex-col overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_50px_rgba(2,6,23,0.24)] backdrop-blur-xl transition-all duration-700 ease-out hover:-translate-y-1 hover:border-blue-300/35 lg:col-span-12 lg:flex-row ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      }`}
+      className="project-card project-card--spotlight group flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_20px_50px_rgba(2,6,23,0.24)] backdrop-blur-xl hover:border-blue-300/35 lg:col-span-12 lg:flex-row"
     >
-      <div className="relative overflow-hidden lg:w-[45%]">
-        <ProjectCover
-          project={project}
-          classNames="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 lg:h-full"
-        />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-blue-500/20" />
-      </div>
-      <div className="flex flex-1 flex-col p-6 md:p-8 lg:w-[55%]">
+      <ProjectMedia
+        project={project}
+        classNames="h-64 w-full object-cover lg:h-full"
+        containerClassName="lg:w-[45%]"
+        overlayClassName="bg-gradient-to-t from-slate-950/60 via-transparent to-blue-500/20"
+      />
+      <div className="project-card__content flex flex-1 flex-col p-6 md:p-8 lg:w-[55%]">
         <p className="text-sm font-medium text-blue-200">{project.role}</p>
         <h3 className="mt-2 text-2xl font-bold tracking-tight text-white">
           {project.title}
@@ -541,25 +534,20 @@ const COMPACT_TECH_ICON_COUNT = 3;
 
 const CompactProjectCard: React.FC<{
   project: Project;
-  isVisible: boolean;
-  delayMs: number;
   onShowDetails: () => void;
-}> = ({ project, isVisible, delayMs, onShowDetails }) => {
+}> = ({ project, onShowDetails }) => {
   const visibleTechs = project.techs?.slice(0, COMPACT_TECH_ICON_COUNT) ?? [];
   const hiddenTechCount = (project.techs?.length ?? 0) - visibleTechs.length;
-  const cardClassName = `group flex flex-col overflow-hidden rounded-[1.5rem] border border-white/12 bg-white/[0.06] text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 ease-out hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/[0.1] ${
-    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-  }`;
+  const cardClassName =
+    "project-card project-card--compact group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/12 bg-white/[0.06] text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] hover:border-blue-300/35 hover:bg-white/[0.1]";
   const cardContent = (
     <>
-      <div className="relative overflow-hidden">
-        <ProjectCover
-          project={project}
-          classNames="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/55 to-blue-500/10" />
-      </div>
-      <div className="flex flex-1 flex-col p-4">
+      <ProjectMedia
+        project={project}
+        classNames="h-32 w-full object-cover"
+        overlayClassName="bg-gradient-to-t from-slate-950/55 to-blue-500/10"
+      />
+      <div className="project-card__content flex flex-1 flex-col p-4">
         <p className="text-xs font-medium text-blue-200">{project.role}</p>
         <h3 className="mt-2 line-clamp-2 text-sm font-bold text-white">
           {project.title}
@@ -582,7 +570,7 @@ const CompactProjectCard: React.FC<{
 
         <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-medium text-slate-300 transition-colors duration-200 group-hover:text-white">
           Details
-          <ArrowRight size={12} />
+          <ArrowRight className="project-card__arrow" size={12} />
         </span>
       </div>
     </>
@@ -591,7 +579,6 @@ const CompactProjectCard: React.FC<{
   return (
     <button
       className={cardClassName}
-      style={{ transitionDelay: isVisible ? `${delayMs}ms` : "0ms" }}
       onClick={onShowDetails}
     >
       {cardContent}
@@ -599,19 +586,36 @@ const CompactProjectCard: React.FC<{
   );
 };
 
-const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
-  project,
-  onClose,
-}) => (
+const ProjectMedia: React.FC<{
+  project: Project;
+  classNames: string;
+  containerClassName?: string;
+  overlayClassName: string;
+}> = ({ project, classNames, containerClassName = "", overlayClassName }) => (
   <div
-    className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-md"
+    className={`project-card__media relative overflow-hidden ${containerClassName}`}
+  >
+    <ProjectCover project={project} classNames={classNames} />
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 ${overlayClassName}`}
+    />
+  </div>
+);
+
+const ProjectModal: React.FC<{
+  project: Project;
+  onClose: () => void;
+}> = ({ project, onClose }) => (
+  <div
+    className="project-modal project-modal--fallback fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-md"
     onClick={onClose}
   >
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-dialog-title"
-      className="project-detail-scroll relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-white/15 bg-slate-900 text-white shadow-2xl"
+      className="project-modal__dialog project-detail-scroll relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-white/15 bg-slate-900 text-white shadow-2xl"
       onClick={(event) => event.stopPropagation()}
     >
       <button
@@ -622,10 +626,12 @@ const ProjectModal: React.FC<{ project: Project; onClose: () => void }> = ({
         <X size={18} />
       </button>
 
-      <ProjectCover
-        project={project}
-        classNames="h-56 w-full rounded-t-[2rem] object-cover md:h-64"
-      />
+      <div className="project-modal__media overflow-hidden rounded-t-[2rem]">
+        <ProjectCover
+          project={project}
+          classNames="h-56 w-full object-cover md:h-64"
+        />
+      </div>
 
       <div className="p-6 md:p-8">
         <p className="text-sm font-medium text-blue-200">{project.role}</p>

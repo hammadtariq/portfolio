@@ -145,6 +145,118 @@ p {
   }
 }
 
+.project-card {
+  transition:
+    transform 120ms cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.project-card__arrow,
+.project-action {
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card--compact:active,
+.project-action:active {
+  transform: scale(0.985);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-card__arrow,
+  .project-action:hover .project-card__arrow {
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+.project-modal--fallback {
+  animation: project-modal-fade-in 140ms cubic-bezier(0.23, 1, 0.32, 1)
+    both;
+}
+
+.project-modal--fallback .project-modal__dialog {
+  animation: project-modal-dialog-in 180ms cubic-bezier(0.23, 1, 0.32, 1)
+    both;
+}
+
+@keyframes project-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes project-modal-dialog-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-video-trigger {
+  animation: hero-video-trigger-pulse 2600ms ease-in-out infinite;
+}
+
+@keyframes hero-video-trigger-pulse {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.045);
+  }
+}
+
+.hero-video-modal {
+  width: min(92vw, 960px);
+  padding: 0;
+  border: none;
+  margin: auto;
+  border-radius: 2rem;
+  overflow: hidden;
+  background: #020617;
+  box-shadow: 0 24px 70px rgb(2 6 23 / 0.55);
+  animation: hero-video-modal-in 220ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.hero-video-modal::backdrop {
+  background: rgb(2 6 23 / 0.85);
+  backdrop-filter: blur(16px);
+  animation: project-modal-fade-in 180ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.hero-video-modal video {
+  display: block;
+  width: 100%;
+  max-height: 85vh;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000;
+}
+
+@keyframes hero-video-modal-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Web approximation of liquid glass, not an official Apple web material. */
 .testimonial-glass {
   border: 1px solid rgb(255 255 255 / 0.16);
@@ -224,6 +336,36 @@ p {
   .shutter-splash__exposure {
     animation: none;
     opacity: 0;
+  }
+
+  .project-modal--fallback,
+  .project-modal--fallback .project-modal__dialog {
+    animation: none;
+  }
+
+  .hero-video-modal,
+  .hero-video-modal::backdrop {
+    animation: none;
+  }
+
+  .hero-video-trigger {
+    animation: none;
+  }
+
+  .project-card,
+  .project-card__base,
+  .project-card__lens,
+  .project-card__arrow,
+  .project-action {
+    transition: none;
+  }
+
+  .project-card__base {
+    filter: none;
+  }
+
+  .project-card__lens {
+    display: none;
   }
 }
 

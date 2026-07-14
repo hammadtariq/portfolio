@@ -1,52 +1,67 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Play, X } from "lucide-react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ImageLoading } from "../constants/image";
 import LazyLoadImg from "./LazyLoadImg";
 
 function Media() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // Play video on hover
+  // Play preview video on hover
   const playVideo = useCallback(() => {
-    videoRef.current?.play();
+    videoRef.current?.play().catch(() => {});
   }, []);
 
-  // Pause video on hover leave
+  // Pause preview video on hover leave
   const pauseVideo = useCallback(() => {
     videoRef.current?.pause();
   }, []);
 
-  // Open video popup on click
   const openPopup = useCallback(() => {
     setIsPopupOpen(true);
   }, []);
 
-  // Close popup on overlay click
+  // Ask the native dialog to close; the "close" event syncs React state
+  // and restores focus to the trigger button automatically.
   const closePopup = useCallback(() => {
-    setIsPopupOpen(false);
+    dialogRef.current?.close();
   }, []);
 
-  // Handle lazy-loading of the video
+  // Lazy-load the preview video once its avatar scrolls into view
   useEffect(() => {
-    const videoElement = videoRef.current; // Capture the ref value
+    const videoElement = videoRef.current;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVideoLoaded(true); // Lazy-load video when in view
-          observer.disconnect(); // Cleanup observer after loading
+          setIsVideoLoaded(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.2 } // Trigger when 50% of the video is visible
+      { threshold: 0.2 }
     );
 
     if (videoElement) observer.observe(videoElement);
 
     return () => {
-      if (videoElement) observer.disconnect(); // Ensure cleanup uses the same ref
+      if (videoElement) observer.disconnect();
     };
   }, []);
+
+  // Open the dialog modally (native focus trap + Escape-to-close) as soon
+  // as it mounts, and keep React state in sync when it closes.
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    if (!isPopupOpen || !dialog) return;
+
+    dialog.showModal();
+
+    const onNativeClose = () => setIsPopupOpen(false);
+    dialog.addEventListener("close", onNativeClose);
+    return () => dialog.removeEventListener("close", onNativeClose);
+  }, [isPopupOpen]);
 
   return (
     <>
@@ -58,58 +73,57 @@ function Media() {
         <LazyLoadImg
           src="/profile-dp.webp"
           alt="Profile"
-          classNames="w-full h-full rounded-full object-cover group-hover:opacity-0 transition-opacity"
+          classNames="w-full h-full rounded-full object-cover transition-opacity duration-300 group-hover:opacity-0"
           load={ImageLoading.Eager}
         />
         {/* Render the video element only after it's in view */}
         <video
           ref={videoRef}
+          aria-hidden="true"
           preload="metadata"
           muted
           loop
-          className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity rounded-full"
-          onMouseEnter={playVideo}
-          onMouseLeave={pauseVideo}
-          aria-label="Intro video"
-          title="Click to view full video"
+          playsInline
+          className="absolute inset-0 h-full w-full rounded-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         >
           {isVideoLoaded && (
             <source src="/intro-compressed.mp4" type="video/mp4" />
           )}
         </video>
-        {/* Play Icon Overlay */}
         <button
+          type="button"
           onClick={openPopup}
-          className="absolute inset-0 flex items-center justify-center rounded-full opacity-100 transition-opacity group-hover:opacity-0"
+          aria-haspopup="dialog"
+          aria-label="Play intro video"
+          className="absolute inset-0 flex items-center justify-center rounded-full opacity-100 transition-opacity duration-300 group-hover:opacity-0 focus-visible:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="white"
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-black bg-opacity-50"
-          >
-            <path d="M6.5 5.5v9l7-4.5-7-4.5z" />
-          </svg>
+          <span className="hero-video-trigger flex h-8 w-8 items-center justify-center rounded-full border border-white/40 bg-black/45 text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-105 md:h-10 md:w-10">
+            <Play size={16} className="translate-x-[1px] fill-current" />
+          </span>
         </button>
       </div>
 
       {isPopupOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-          onClick={closePopup}
+        <dialog
+          ref={dialogRef}
+          aria-label="Hammad Tariq's intro video"
+          className="hero-video-modal"
+          onClick={(event) => {
+            if (event.target === dialogRef.current) closePopup();
+          }}
         >
-          <div
-            className="bg-white rounded-lg overflow-hidden w-11/12 md:w-2/3 lg:w-1/2 relative"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+          <button
+            type="button"
+            onClick={closePopup}
+            aria-label="Close video"
+            className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-slate-300 backdrop-blur transition-colors duration-200 hover:bg-white/15 hover:text-white"
           >
-            <video
-              controls
-              autoPlay
-              className="w-full"
-              src="/intro.mp4"
-            ></video>
-          </div>
-        </div>
+            <X size={18} />
+          </button>
+          <video controls autoPlay playsInline src="/intro.mp4">
+            Your browser does not support the video tag.
+          </video>
+        </dialog>
       )}
     </>
   );
