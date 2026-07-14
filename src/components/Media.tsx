@@ -87,7 +87,7 @@ function Media() {
           className="absolute inset-0 h-full w-full rounded-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         >
           {isVideoLoaded && (
-            <source src="/intro-compressed.mp4" type="video/mp4" />
+            <source src="/hammad-intro-video-compressed.mp4" type="video/mp4" />
           )}
         </video>
         <button
@@ -120,7 +120,7 @@ function Media() {
           >
             <X size={18} />
           </button>
-          <video controls autoPlay playsInline src="/intro.mp4">
+          <video controls autoPlay playsInline src="/hammad-intro-video-compressed.mp4">
             Your browser does not support the video tag.
           </video>
         </dialog>
