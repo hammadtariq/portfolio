@@ -1,8 +1,6 @@
 import { forwardRef } from "react";
 
-import TechStack from "./TechStack";
 import { TechnologyCategory } from "../types/projectTypes";
-import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 const toolsAndTechnologies: TechnologyCategory[] = [
   {
@@ -81,61 +79,106 @@ const toolsAndTechnologies: TechnologyCategory[] = [
   },
 ];
 
-const categorySurfaces = [
-  "border-blue-200/80 bg-[linear-gradient(135deg,rgba(219,234,254,0.88),rgba(255,255,255,0.92))]",
-  "border-cyan-200/80 bg-[linear-gradient(135deg,rgba(207,250,254,0.82),rgba(255,255,255,0.94))]",
-  "border-slate-200 bg-white/90",
-  "border-indigo-200/80 bg-[linear-gradient(135deg,rgba(224,231,255,0.7),rgba(255,255,255,0.94))]",
-  "border-blue-200/80 bg-[linear-gradient(135deg,rgba(219,234,254,0.72),rgba(255,255,255,0.96))]",
-  "border-slate-200 bg-white/90",
-  "border-cyan-200/80 bg-[linear-gradient(135deg,rgba(236,254,255,0.96),rgba(255,255,255,0.92))]",
-  "border-indigo-200/80 bg-[linear-gradient(135deg,rgba(238,242,255,0.9),rgba(255,255,255,0.96))]",
+const capabilityPillars = [
+  {
+    title: "Product interfaces",
+    description:
+      "Responsive product surfaces, mobile experiences, and the testing discipline that keeps them dependable.",
+    categories: [
+      "Programming Languages",
+      "Frontend Technologies",
+      "Mobile Frameworks",
+      "Testing & QA",
+    ],
+  },
+  {
+    title: "Backend and data systems",
+    description:
+      "APIs, real-time services, and data foundations designed to stay understandable as products grow.",
+    categories: ["Backend Technologies", "Databases & Tools"],
+  },
+  {
+    title: "Cloud and delivery",
+    description:
+      "Production infrastructure, serverless architecture, and delivery systems built for reliable operation.",
+    categories: ["Cloud & DevOps"],
+  },
+  {
+    title: "Emerging platforms",
+    description:
+      "Practical blockchain integrations and decentralized tooling where the product case earns the complexity.",
+    categories: ["BlockChain Technologies"],
+  },
 ];
 
 const Skills = forwardRef<HTMLElement>((_props, ref) => {
-  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
+  const pillars = capabilityPillars.map((pillar) => ({
+    ...pillar,
+    technologies: pillar.categories.flatMap(
+      (categoryName) =>
+        toolsAndTechnologies.find(
+          ({ category }) => category === categoryName,
+        )?.technologies ?? [],
+    ),
+  }));
 
   return (
     <section
       ref={ref}
       id="skills"
-      className="relative overflow-hidden bg-slate-50 py-24 md:py-32"
+      aria-labelledby="skills-heading"
+      className="relative overflow-hidden bg-[#0c0c0c] py-24 text-white md:py-32"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_8%,rgba(186,230,253,0.52),transparent_22%),radial-gradient(circle_at_8%_82%,rgba(219,234,254,0.7),transparent_20%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_92%_10%,rgba(182,0,168,0.12),transparent_24%),radial-gradient(circle_at_8%_88%,rgba(190,76,0,0.08),transparent_22%)]"
       />
       <div className="container relative mx-auto px-4">
         <div className="max-w-2xl">
-          <p className="mb-4 text-sm font-medium text-blue-700">Capabilities</p>
-          <h2 className="text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
+          <p className="mb-4 text-sm font-medium text-fuchsia-200">
+            Capabilities
+          </p>
+          <h2
+            id="skills-heading"
+            className="text-4xl font-bold tracking-tight text-white md:text-5xl"
+          >
             The stack behind the work
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-slate-600">
-            A practical toolkit for designing reliable systems from interface to infrastructure.
+          <p className="mt-5 text-lg leading-relaxed text-white/65">
+            A practical toolkit for designing reliable systems from interface
+            to infrastructure.
           </p>
         </div>
 
-        <div
-          ref={revealRef}
-          className={`mt-12 grid grid-cols-1 gap-5 transition-all duration-700 ease-out md:grid-cols-2 md:gap-6 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
-        >
-          {toolsAndTechnologies.map((category, index) => (
-            <div
-              key={category.category}
-              className={`rounded-[2rem] border p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_14px_36px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_20px_44px_rgba(37,99,235,0.12)] motion-reduce:transition-none ${categorySurfaces[index]}`}
+        <div className="mt-14 grid border-t border-white/15 md:grid-cols-2">
+          {pillars.map((pillar, index) => (
+            <article
+              key={pillar.title}
+              className={`border-b border-white/15 py-9 md:py-10 ${
+                index % 2 === 0 ? "md:border-r md:pr-10" : "md:pl-10"
+              }`}
             >
-              <h3 className="mb-5 text-base font-semibold tracking-tight text-slate-950">
-                {category.category}
+              <h3 className="text-2xl font-semibold tracking-tight text-white">
+                {pillar.title}
               </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.technologies.map((tech) => (
-                  <TechStack key={tech} tech={tech} classNames="w-4 h-4" />
+              <p className="mt-3 max-w-[48ch] leading-relaxed text-white/55">
+                {pillar.description}
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2.5">
+                {pillar.technologies.map((tech) => (
+                  <li
+                    key={tech}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-white/72"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-1 w-1 rounded-full bg-fuchsia-300/70"
+                    />
+                    {tech}
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            </article>
           ))}
         </div>
       </div>
