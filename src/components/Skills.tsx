@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import { Helmet } from "react-helmet";
 
 import TechStack from "./TechStack";
 import { TechnologyCategory } from "../types/projectTypes";
@@ -106,32 +105,6 @@ const Skills = forwardRef<HTMLElement>((_props, ref) => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_90%_8%,rgba(186,230,253,0.52),transparent_22%),radial-gradient(circle_at_8%_82%,rgba(219,234,254,0.7),transparent_20%)]"
       />
-      <Helmet>
-        <title>Skills & Technologies | Hammad Tariq - Full Stack Developer</title>
-        <meta
-          name="description"
-          content="Explore the expertise of Hammad Tariq, a Full Stack Developer skilled in modern technologies including React, Node.js, AWS, Blockchain, and more."
-        />
-        {/* Open Graph meta tags */}
-        <meta property="og:title" content="Skills & Technologies | Hammad Tariq - Full Stack Developer" />
-        <meta
-          property="og:description"
-          content="Explore the expertise of Hammad Tariq, a Full Stack Developer skilled in modern technologies including React, Node.js, AWS, Blockchain, and more."
-        />
-        <meta property="og:image" content="/profile-dp.webp" />
-        <meta property="og:url" content="https://tariqhammad.com/skills" />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter meta tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Skills & Technologies | Hammad Tariq - Full Stack Developer" />
-        <meta
-          name="twitter:description"
-          content="Explore the expertise of Hammad Tariq, a Full Stack Developer skilled in modern technologies including React, Node.js, AWS, Blockchain, and more."
-        />
-        <meta name="twitter:image" content="/profile-dp.webp" />
-      </Helmet>
-
       <div className="container relative mx-auto px-4">
         <div className="max-w-2xl">
           <p className="mb-4 text-sm font-medium text-blue-700">Capabilities</p>

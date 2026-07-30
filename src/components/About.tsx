@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import { Helmet } from "react-helmet";
 import { Compass, MessagesSquare, ShieldCheck } from "lucide-react";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
@@ -37,19 +36,6 @@ const About = forwardRef<HTMLElement>((_props, ref) => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_18%,rgba(182,0,168,0.18),transparent_28%),radial-gradient(circle_at_92%_84%,rgba(190,76,0,0.14),transparent_24%)]"
       />
-      <Helmet>
-        <title>About Hammad Tariq | SaaS &amp; AI Engineer</title>
-        <meta name="description" content="Meet Hammad Tariq, a senior full-stack engineer with 10+ years building SaaS products, AI systems, and reliable software for startups and enterprise teams." />
-        <meta property="og:title" content="About Hammad Tariq | SaaS &amp; AI Engineer" />
-        <meta property="og:description" content="Meet Hammad Tariq, a senior full-stack engineer with 10+ years building SaaS products, AI systems, and reliable software for startups and enterprise teams." />
-        <meta property="og:image" content="/profile-dp.webp" />
-        <meta property="og:url" content="https://tariqhammad.com#about" />
-        <meta property="og:type" content="profile" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Hammad Tariq | SaaS &amp; AI Engineer" />
-        <meta name="twitter:description" content="Meet Hammad Tariq, a senior full-stack engineer with 10+ years building SaaS products, AI systems, and reliable software for startups and enterprise teams." />
-        <meta name="twitter:image" content="/profile-dp.webp" />
-      </Helmet>
       <div className="container relative mx-auto px-4">
         <div
           ref={revealRef}

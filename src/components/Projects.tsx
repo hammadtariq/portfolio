@@ -1,5 +1,4 @@
 import { forwardRef, useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import {
   ArrowRight,
   ChevronDown,
@@ -382,19 +381,6 @@ const Projects = forwardRef<HTMLElement>((_props, ref) => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_14%,rgba(37,99,235,0.32),transparent_25%),radial-gradient(circle_at_90%_70%,rgba(14,165,233,0.14),transparent_24%)]"
       />
-      <Helmet>
-        <title>Projects | Hammad Tariq - Full Stack Developer</title>
-        <meta name="description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
-        <meta property="og:title" content="Projects | Hammad Tariq - Full Stack Developer" />
-        <meta property="og:description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
-        <meta property="og:image" content="/profile-dp.webp" />
-        <meta property="og:url" content="https://tariqhammad.com#projects" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Projects | Hammad Tariq - Full Stack Developer" />
-        <meta name="twitter:description" content="Explore the projects developed by Hammad Tariq, showcasing his expertise in full-stack development with React, Node.js, AWS, and more." />
-        <meta name="twitter:image" content="/profile-dp.webp" />
-      </Helmet>
       <div className="container relative mx-auto px-4">
         <p className="mb-4 text-sm font-medium text-blue-200">Projects</p>
         <h2 className="text-4xl font-bold tracking-tight md:text-5xl">

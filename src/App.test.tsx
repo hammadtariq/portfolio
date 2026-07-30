@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from "vitest";
 import { forwardRef } from "react";
 import App from "./App";
 
-vi.mock("react-helmet", () => ({ Helmet: ({ children }: { children: React.ReactNode }) => <>{children}</> }));
 vi.mock("./components/Header", () => ({ default: () => <header /> }));
 vi.mock("./components/Hero", () => ({ default: () => <section id="hero" /> }));
 vi.mock("./components/CredibilityBar", () => ({ default: () => <section id="credibility" /> }));
